@@ -27,6 +27,16 @@ def home():
 
 @app.post("/register")
 def register(user: UserCreate, db: Session = Depends(get_db)):
+
+    existing_user = db.query(User).filter(
+        User.email == user.email
+    ).first()
+
+    if existing_user:
+        return {
+            "message": "Email already registered"
+        }
+
     new_user = User(
         name=user.name,
         email=user.email,
@@ -38,5 +48,7 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     db.refresh(new_user)
 
     return {
-        "message": "User registered successfully"
+        "id": new_user.id,
+        "name": new_user.name,
+        "email": new_user.email
     }

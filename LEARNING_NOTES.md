@@ -67,16 +67,12 @@ Build an AI-powered Career Intelligence Platform.
 - APIs can be tested without a frontend.
 - GET is used to retrieve data.
 
-
-
-# Week 1 Day 6
+# Week 1 Day 6 (part 1)
 
 ## Pydantic
 
 - Used by FastAPI for data validation.
-
 - Converts JSON into Python objects.
-
 - Rejects invalid requests automatically.
 
 ## API Concepts
@@ -89,3 +85,59 @@ PUT -> Update data
 
 DELETE -> Remove data
 
+# Week 1 Day 6 (part 2)
+
+## What I learned
+
+- Built my first POST API.
+- Used Pydantic for request validation.
+- Used SQLAlchemy ORM for database operations.
+- Connected FastAPI with PostgreSQL.
+- Inserted user data into the database.
+- Enforced unique email constraints.
+
+## API Flow
+
+Client
+
+↓
+
+FastAPI
+
+↓
+
+Pydantic
+
+↓
+
+SQLAlchemy
+
+↓
+
+PostgreSQL
+
+
+
+# Week 1 Day 7
+
+## New SQLAlchemy Methods
+
+db.query()
+
+Fetches records from database.
+
+db.filter()
+
+Applies conditions.
+
+db.first()
+
+Returns first matching record.
+
+## Email Validation
+
+EmailStr validates email format.
+
+## Duplicate Check
+
+Before creating a user, the API checks whether the email already exists.
