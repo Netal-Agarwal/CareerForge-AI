@@ -220,8 +220,6 @@ Generate JWT
 
 Return Token
 
-
-
 # Week 2 Day 4
 
 ## Protected Routes
@@ -230,7 +228,7 @@ Created protected endpoints using JWT validation.
 
 ## Authorization Header
 
-Authorization: Bearer <token>
+Authorization: Bearer 
 
 ## Dependency Injection
 
@@ -239,3 +237,35 @@ Used Depends() to enforce authentication.
 ## JWT Verification
 
 Verified token validity before allowing access.
+
+
+
+# Week 2 Day 5
+
+## Current User API
+
+Created GET /me endpoint.
+
+## JWT Workflow
+
+JWT
+
+↓
+
+Verify Token
+
+↓
+
+Extract Email
+
+↓
+
+Find User
+
+↓
+
+Return User Data
+
+## User Context
+
+Used token payload to identify the currently authenticated user.

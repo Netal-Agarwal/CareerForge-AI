@@ -47,8 +47,19 @@ def get_current_user(
             detail="Invalid or expired token"
         )
 
-    return email
+    db = SessionLocal()
 
+    user = db.query(User).filter(
+    User.email == email
+    ).first()
+
+    db.close()
+
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
 
 @app.get("/")
 def home():
@@ -124,4 +135,14 @@ def profile(
     return {
         "message": "Protected route accessed",
         "email": current_user
+    }
+
+@app.get("/me")
+def get_me(
+    current_user: User = Depends(get_current_user)
+):
+    return {
+        "id": current_user.id,
+        "name": current_user.name,
+        "email": current_user.email
     }
