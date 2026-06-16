@@ -1,11 +1,11 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
-from auth import hash_password
+from auth import hash_password, verify_password
 
 from database import engine, SessionLocal
 from models import Base, User
-from schemas import UserCreate
+from schemas import UserCreate, UserLogin
 
 Base.metadata.create_all(bind=engine)
 
@@ -53,4 +53,33 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
         "id": new_user.id,
         "name": new_user.name,
         "email": new_user.email
+    }
+
+@app.post("/login")
+def login(user: UserLogin, db: Session = Depends(get_db)):
+
+    existing_user = db.query(User).filter(
+        User.email == user.email
+    ).first()
+
+    if not existing_user:
+        return {
+            "message": "User not found"
+        }
+
+    if not verify_password(
+        user.password,
+        existing_user.password
+    ):
+        return {
+            "message": "Invalid password"
+        }
+
+    return {
+        "message": "Login successful",
+        "user": {
+            "id": existing_user.id,
+            "name": existing_user.name,
+            "email": existing_user.email
+        }
     }

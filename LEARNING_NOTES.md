@@ -140,8 +140,6 @@ EmailStr validates email format.
 
 Before creating a user, the API checks whether the email already exists.
 
-
-
 # Week 2 Day 1
 
 ## Password Hashing
@@ -159,3 +157,31 @@ Converts plain password into hashed password.
 verify_password()
 
 Checks whether a password matches a stored hash.
+
+
+
+# Week 2 Day 2
+
+## Login API
+
+Built a login endpoint using FastAPI.
+
+## Password Verification
+
+Used verify_password() to compare plain text passwords with bcrypt hashes.
+
+## Authentication Flow
+
+User Login Request
+
+↓
+
+Database Lookup
+
+↓
+
+Password Verification
+
+↓
+
+Success / Failure
