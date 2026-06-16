@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
+from jwt_handler import create_access_token
+
 from auth import hash_password, verify_password
 
 from database import engine, SessionLocal
@@ -75,11 +77,13 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
             "message": "Invalid password"
         }
 
+    token = create_access_token(
+    {
+        "sub": existing_user.email
+    }
+    )
+
     return {
-        "message": "Login successful",
-        "user": {
-            "id": existing_user.id,
-            "name": existing_user.name,
-            "email": existing_user.email
-        }
+        "access_token": token,
+        "token_type": "bearer"
     }

@@ -158,8 +158,6 @@ verify_password()
 
 Checks whether a password matches a stored hash.
 
-
-
 # Week 2 Day 2
 
 ## Login API
@@ -185,3 +183,41 @@ Password Verification
 ↓
 
 Success / Failure
+
+
+
+# Week 2 Day 3
+
+## JWT Authentication
+
+Used python-jose to generate JWT tokens.
+
+## JWT Structure
+
+Header
+
+Payload
+
+Signature
+
+## Claims
+
+sub = user email
+
+exp = expiration time
+
+## Login Flow
+
+Email + Password
+
+↓
+
+Verify User
+
+↓
+
+Generate JWT
+
+↓
+
+Return Token
