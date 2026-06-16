@@ -43,3 +43,9 @@ def verify_token(token: str):
 
     except JWTError:
         return None
+
+from config import (
+    SECRET_KEY,
+    ALGORITHM,
+    ACCESS_TOKEN_EXPIRE_MINUTES
+)

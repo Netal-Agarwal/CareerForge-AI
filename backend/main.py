@@ -65,7 +65,10 @@ def home():
     }
 
 
-@app.post("/register")
+@app.post(
+    "/register",
+    tags=["Authentication"]
+)
 def register(user: UserCreate, db: Session = Depends(get_db)):
 
     existing_user = db.query(User).filter(
@@ -73,9 +76,10 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     ).first()
 
     if existing_user:
-        return {
-            "message": "Email already registered"
-        }
+        raise HTTPException(
+            status_code=400,
+            detail="Email already registered"
+        )
 
     new_user = User(
     name=user.name,
@@ -93,7 +97,10 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
         "email": new_user.email
     }
 
-@app.post("/login")
+@app.post(
+    "/login",
+    tags=["Authentication"]
+)
 def login(user: UserLogin, db: Session = Depends(get_db)):
 
     existing_user = db.query(User).filter(
@@ -101,17 +108,21 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     ).first()
 
     if not existing_user:
-        return {
-            "message": "User not found"
-        }
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
 
     if not verify_password(
         user.password,
         existing_user.password
     ):
-        return {
-            "message": "Invalid password"
-        }
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid password"
+        )
+
+    
 
     token = create_access_token(
     {
@@ -124,7 +135,10 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
         "token_type": "bearer"
     }
 
-@app.get("/profile")
+@app.get(
+    "/profile",
+    tags=["Users"]
+)
 def profile(
     current_user: str = Depends(get_current_user)
 ):
@@ -134,7 +148,10 @@ def profile(
         "email": current_user
     }
 
-@app.get("/me")
+@app.get(
+    "/me",
+    tags=["Users"]
+)
 def get_me(
     current_user: User = Depends(get_current_user)
 ):
@@ -142,4 +159,13 @@ def get_me(
         "id": current_user.id,
         "name": current_user.name,
         "email": current_user.email
+    }
+
+@app.get(
+    "/health",
+    tags=["System"]
+)
+def health():
+    return {
+        "status": "healthy"
     }

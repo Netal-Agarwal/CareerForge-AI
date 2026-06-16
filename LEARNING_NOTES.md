@@ -268,8 +268,6 @@ Return User Data
 
 Used token payload to identify the currently authenticated user.
 
-
-
 # Week 2 Day 6
 
 ## HTTPBearer
@@ -287,3 +285,27 @@ Added JWT authentication support inside Swagger UI.
 /me
 
 can now be tested directly from Swagger after authorization.
+
+
+
+# Week 2 Day 7
+
+## Professional API Design
+
+Implemented proper HTTP status codes.
+
+## HTTPException
+
+Used FastAPI HTTPException for error handling.
+
+## API Documentation
+
+Organized routes using Swagger tags.
+
+## Configuration Management
+
+Moved JWT settings to [config.py](http://config.py).
+
+## Health Check
+
+Added /health endpoint for monitoring.
