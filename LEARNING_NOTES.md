@@ -238,8 +238,6 @@ Used Depends() to enforce authentication.
 
 Verified token validity before allowing access.
 
-
-
 # Week 2 Day 5
 
 ## Current User API
@@ -269,3 +267,23 @@ Return User Data
 ## User Context
 
 Used token payload to identify the currently authenticated user.
+
+
+
+# Week 2 Day 6
+
+## HTTPBearer
+
+Used FastAPI's HTTPBearer security scheme.
+
+## Swagger Authorization
+
+Added JWT authentication support inside Swagger UI.
+
+## Protected Endpoints
+
+/profile
+
+/me
+
+can now be tested directly from Swagger after authorization.

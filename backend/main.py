@@ -9,9 +9,16 @@ from database import engine, SessionLocal
 from models import Base, User
 from schemas import UserCreate, UserLogin
 
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+security = HTTPBearer(
+    auto_error=True
+)
 
 
 def get_db():
@@ -22,22 +29,10 @@ def get_db():
         db.close()
 
 def get_current_user(
-    authorization: str = Header(None)
+    credentials: HTTPAuthorizationCredentials = Depends(security)
 ):
 
-    if not authorization:
-        raise HTTPException(
-            status_code=401,
-            detail="Authorization header missing"
-        )
-
-    try:
-        token = authorization.split(" ")[1]
-    except:
-        raise HTTPException(
-            status_code=401,
-            detail="Invalid token format"
-        )
+    token = credentials.credentials
 
     email = verify_token(token)
 
@@ -50,7 +45,7 @@ def get_current_user(
     db = SessionLocal()
 
     user = db.query(User).filter(
-    User.email == email
+        User.email == email
     ).first()
 
     db.close()
@@ -60,6 +55,8 @@ def get_current_user(
             status_code=404,
             detail="User not found"
         )
+
+    return user
 
 @app.get("/")
 def home():
