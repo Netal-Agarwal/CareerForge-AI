@@ -184,8 +184,6 @@ Password Verification
 
 Success / Failure
 
-
-
 # Week 2 Day 3
 
 ## JWT Authentication
@@ -221,3 +219,23 @@ Generate JWT
 ↓
 
 Return Token
+
+
+
+# Week 2 Day 4
+
+## Protected Routes
+
+Created protected endpoints using JWT validation.
+
+## Authorization Header
+
+Authorization: Bearer <token>
+
+## Dependency Injection
+
+Used Depends() to enforce authentication.
+
+## JWT Verification
+
+Verified token validity before allowing access.

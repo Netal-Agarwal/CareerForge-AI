@@ -1,7 +1,7 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Header, HTTPException
 from sqlalchemy.orm import Session
 
-from jwt_handler import create_access_token
+from jwt_handler import create_access_token, verify_token
 
 from auth import hash_password, verify_password
 
@@ -20,6 +20,34 @@ def get_db():
         yield db
     finally:
         db.close()
+
+def get_current_user(
+    authorization: str = Header(None)
+):
+
+    if not authorization:
+        raise HTTPException(
+            status_code=401,
+            detail="Authorization header missing"
+        )
+
+    try:
+        token = authorization.split(" ")[1]
+    except:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid token format"
+        )
+
+    email = verify_token(token)
+
+    if not email:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid or expired token"
+        )
+
+    return email
 
 
 @app.get("/")
@@ -86,4 +114,14 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     return {
         "access_token": token,
         "token_type": "bearer"
+    }
+
+@app.get("/profile")
+def profile(
+    current_user: str = Depends(get_current_user)
+):
+
+    return {
+        "message": "Protected route accessed",
+        "email": current_user
     }
