@@ -116,8 +116,6 @@ SQLAlchemy
 
 PostgreSQL
 
-
-
 # Week 1 Day 7
 
 ## New SQLAlchemy Methods
@@ -141,3 +139,23 @@ EmailStr validates email format.
 ## Duplicate Check
 
 Before creating a user, the API checks whether the email already exists.
+
+
+
+# Week 2 Day 1
+
+## Password Hashing
+
+Passwords should never be stored in plain text.
+
+Used Passlib with bcrypt to hash passwords before storing them in PostgreSQL.
+
+## Functions
+
+hash_password()
+
+Converts plain password into hashed password.
+
+verify_password()
+
+Checks whether a password matches a stored hash.

@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
+from auth import hash_password
+
 from database import engine, SessionLocal
 from models import Base, User
 from schemas import UserCreate
@@ -38,9 +40,9 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
         }
 
     new_user = User(
-        name=user.name,
-        email=user.email,
-        password=user.password
+    name=user.name,
+    email=user.email,
+    password=hash_password(user.password)
     )
 
     db.add(new_user)
