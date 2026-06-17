@@ -48,26 +48,63 @@ def extract_skills(text):
 
     return found_skills
 
+CAREER_TRACKS = {
 
-TARGET_BACKEND_SKILLS = [
-    "Python",
-    "FastAPI",
-    "PostgreSQL",
-    "Docker",
-    "AWS",
-    "Redis",
-    "Git",
-    "CI/CD"
-]
+    "backend_developer": [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Docker",
+        "AWS",
+        "Redis",
+        "Git",
+        "CI/CD"
+    ],
 
+    "data_scientist": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "Matplotlib",
+        "Machine Learning",
+        "SQL",
+        "Statistics"
+    ],
+
+    "devops_engineer": [
+        "Linux",
+        "Docker",
+        "Kubernetes",
+        "AWS",
+        "Terraform",
+        "Git",
+        "CI/CD"
+    ],
+
+    "fullstack_developer": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React",
+        "Node.js",
+        "MongoDB",
+        "Git"
+    ]
+}
 
 def find_missing_skills(
-    extracted_skills
+    extracted_skills,
+    career_track
 ):
+
+    target_skills = CAREER_TRACKS.get(
+        career_track,
+        []
+    )
 
     missing_skills = []
 
-    for skill in TARGET_BACKEND_SKILLS:
+    for skill in target_skills:
 
         if skill not in extracted_skills:
             missing_skills.append(skill)

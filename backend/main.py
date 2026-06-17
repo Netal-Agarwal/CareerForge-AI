@@ -24,6 +24,8 @@ from parser import (
     generate_learning_roadmap
 )
 
+from fastapi import Query
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -497,4 +499,46 @@ def learning_roadmap(
 
     return {
         "roadmap": roadmap
+    }
+
+@app.get(
+    "/career-analysis",
+    tags=["Career Analysis"]
+)
+def career_analysis(
+    career_track: str = Query(...),
+
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    skills = extract_skills(text)
+
+    missing_skills = find_missing_skills(
+        skills,
+        career_track
+    )
+
+    roadmap = generate_learning_roadmap(
+    missing_skills
+    )
+
+    return {
+        "career_track": career_track,
+        "existing_skills": skills,
+        "missing_skills": missing_skills
     }

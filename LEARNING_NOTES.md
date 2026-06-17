@@ -728,8 +728,6 @@ This skill gap engine will later power:
 - Career Roadmaps
 - Interview Preparation Suggestions
 
-
-
 # Week 4 Day 2
 
 ## Personalized Learning Roadmap
@@ -745,7 +743,6 @@ to generate a prioritized learning path based on missing resume skills.
 Compared:
 
 - Existing Skills
-
 - Missing Skills
 
 and generated learning recommendations.
@@ -755,17 +752,13 @@ and generated learning recommendations.
 Each missing skill is assigned:
 
 - Priority
-
 - Recommended Learning Resource
 
 ## Key Learnings
 
 - Recommendation systems
-
 - Prioritization logic
-
 - Skill progression mapping
-
 - Transforming analysis into actionable advice
 
 ## CareerForge Evolution
@@ -778,3 +771,60 @@ Resume
 
 → Learning Roadmap
 
+
+
+
+
+# Week 4 Day 3
+
+## Career Track Recommendation Engine
+
+Implemented:
+
+GET /career-analysis
+
+to generate skill-gap analysis for different career paths.
+
+## Supported Career Tracks
+
+- Backend Developer
+
+- Data Scientist
+
+- DevOps Engineer
+
+- Full Stack Developer
+
+## Dynamic Skill Analysis
+
+Instead of using a fixed skill framework, the system now compares user skills against track-specific skill requirements.
+
+## Query Parameters
+
+Introduced:
+
+career_track
+
+as a dynamic API parameter.
+
+## Key Learnings
+
+- Dynamic recommendation systems
+
+- Query parameters in FastAPI
+
+- Career-specific analysis
+
+- Flexible skill gap detection
+
+## CareerForge Evolution
+
+Resume
+
+→ Skill Extraction
+
+→ Career Track Selection
+
+→ Skill Gap Analysis
+
+→ Personalized Learning Roadmap
