@@ -233,4 +233,47 @@ def match_job_roles(
 
     return matched_roles
 
-    
+def calculate_resume_score(
+    extracted_skills,
+    career_track
+):
+
+    target_skills = CAREER_TRACKS.get(
+        career_track,
+        []
+    )
+
+    if len(target_skills) == 0:
+        return 0
+
+    matched = 0
+
+    for skill in target_skills:
+
+        if skill in extracted_skills:
+            matched += 1
+
+    score = round(
+        (matched / len(target_skills)) * 100
+    )
+
+    return score
+
+def get_grade(score):
+
+    if score >= 90:
+        return "A+"
+
+    elif score >= 80:
+        return "A"
+
+    elif score >= 70:
+        return "B"
+
+    elif score >= 60:
+        return "C"
+
+    elif score >= 50:
+        return "D"
+
+    return "Needs Improvement"

@@ -22,7 +22,9 @@ from parser import (
     extract_skills,
     find_missing_skills,
     generate_learning_roadmap,
-    match_job_roles
+    match_job_roles,
+    calculate_resume_score,
+    get_grade
 )
 
 from fastapi import Query
@@ -577,4 +579,51 @@ def job_matches(
     return {
         "skills": skills,
         "recommended_roles": matches
+    }
+
+@app.get(
+    "/resume-score",
+    tags=["Career Analysis"]
+)
+def resume_score(
+    career_track: str = Query(...),
+
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    skills = extract_skills(text)
+
+    missing_skills = find_missing_skills(
+        skills,
+        career_track
+    )
+
+    score = calculate_resume_score(
+        skills,
+        career_track
+    )
+
+    grade = get_grade(score)
+
+    return {
+        "career_track": career_track,
+        "resume_score": score,
+        "grade": grade,
+        "matched_skills": len(skills),
+        "missing_skills": len(missing_skills)
     }

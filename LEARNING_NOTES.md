@@ -819,10 +819,6 @@ Resume
 
 → Personalized Learning Roadmap
 
-
-
-
-
 # Week 4 Day 4
 
 ## Job Role Matching Engine
@@ -838,7 +834,6 @@ to recommend suitable job roles based on extracted resume skills.
 Compared:
 
 - User Skills
-
 - Role Skill Requirements
 
 and generated a compatibility score.
@@ -852,23 +847,16 @@ Score Formula:
 ## Supported Roles
 
 - Backend Developer
-
 - Data Scientist
-
 - DevOps Engineer
-
 - Full Stack Developer
-
 - Software Engineer Intern
 
 ## Key Learnings
 
 - Similarity scoring
-
 - Recommendation systems
-
 - Skill-role mapping
-
 - Ranking algorithms
 
 ## CareerForge Evolution
@@ -882,3 +870,135 @@ Resume
 → Learning Roadmap
 
 → Job Role Matching
+
+
+
+# Week 4 Day 5
+
+## Resume Score Engine
+
+Implemented:
+
+GET /resume-score
+
+to calculate a resume score based on career-specific skill requirements.
+
+## Scoring Logic
+
+Score Formula:
+
+(matched_skills / target_skills) * 100
+
+## Resume Grades
+
+A+ : 90+
+
+A  : 80+
+
+B  : 70+
+
+C  : 60+
+
+D  : 50+
+
+Needs Improvement : <50
+
+## Analysis Components
+
+- Skill Matching
+
+- Missing Skill Count
+
+- Resume Score
+
+- Grade Assignment
+
+## Key Learnings
+
+- Scoring systems
+
+- Ranking algorithms
+
+- Quantifying resume strength
+
+- Career-specific evaluation
+
+## CareerForge Evolution
+
+Resume
+
+→ Skill Extraction
+
+→ Career Analysis
+
+→ Learning Roadmap
+
+→ Job Matching
+
+→ Resume Scoring
+
+
+
+# Week 4 Day 5
+
+## Resume Score Engine
+
+Implemented:
+
+GET /resume-score
+
+to calculate a resume score based on career-specific skill requirements.
+
+## Scoring Logic
+
+Score Formula:
+
+(matched_skills / target_skills) * 100
+
+## Resume Grades
+
+A+ : 90+
+
+A  : 80+
+
+B  : 70+
+
+C  : 60+
+
+D  : 50+
+
+Needs Improvement : <50
+
+## Analysis Components
+
+- Skill Matching
+
+- Missing Skill Count
+
+- Resume Score
+
+- Grade Assignment
+
+## Key Learnings
+
+- Scoring systems
+
+- Ranking algorithms
+
+- Quantifying resume strength
+
+- Career-specific evaluation
+
+## CareerForge Evolution
+
+Resume
+
+→ Skill Extraction
+
+→ Career Analysis
+
+→ Learning Roadmap
+
+→ Job Matching
+
+→ Resume Scoring
