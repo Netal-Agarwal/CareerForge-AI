@@ -277,3 +277,29 @@ def get_grade(score):
         return "D"
 
     return "Needs Improvement"
+
+
+def generate_feedback(
+    extracted_skills,
+    career_track
+):
+
+    target_skills = CAREER_TRACKS.get(
+        career_track,
+        []
+    )
+
+    strengths = []
+    weaknesses = []
+
+    for skill in target_skills:
+
+        if skill in extracted_skills:
+            strengths.append(skill)
+        else:
+            weaknesses.append(skill)
+
+    return {
+        "strengths": strengths,
+        "weaknesses": weaknesses
+    }

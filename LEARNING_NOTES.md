@@ -871,7 +871,63 @@ Resume
 
 → Job Role Matching
 
+# Week 4 Day 5
 
+## Resume Score Engine
+
+Implemented:
+
+GET /resume-score
+
+to calculate a resume score based on career-specific skill requirements.
+
+## Scoring Logic
+
+Score Formula:
+
+(matched_skills / target_skills) * 100
+
+## Resume Grades
+
+A+ : 90+
+
+A  : 80+
+
+B  : 70+
+
+C  : 60+
+
+D  : 50+
+
+Needs Improvement : <50
+
+## Analysis Components
+
+- Skill Matching
+- Missing Skill Count
+- Resume Score
+- Grade Assignment
+
+## Key Learnings
+
+- Scoring systems
+- Ranking algorithms
+- Quantifying resume strength
+- Career-specific evaluation
+
+## CareerForge Evolution
+
+Resume
+
+→ Skill Extraction
+
+→ Career Analysis
+
+→ Learning Roadmap
+
+→ Job Matching
+
+→ Resume Scoring
 
 # Week 4 Day 5
 
@@ -906,21 +962,15 @@ Needs Improvement : <50
 ## Analysis Components
 
 - Skill Matching
-
 - Missing Skill Count
-
 - Resume Score
-
 - Grade Assignment
 
 ## Key Learnings
 
 - Scoring systems
-
 - Ranking algorithms
-
 - Quantifying resume strength
-
 - Career-specific evaluation
 
 ## CareerForge Evolution
@@ -939,55 +989,49 @@ Resume
 
 
 
-# Week 4 Day 5
 
-## Resume Score Engine
+
+# Week 4 Day 6
+
+## Resume Feedback Engine
 
 Implemented:
 
-GET /resume-score
+GET /resume-feedback
 
-to calculate a resume score based on career-specific skill requirements.
+to generate strengths and weaknesses analysis.
 
-## Scoring Logic
+## Feedback Logic
 
-Score Formula:
+Compared:
 
-(matched_skills / target_skills) * 100
+- Extracted Resume Skills
 
-## Resume Grades
+- Career Track Skill Requirements
 
-A+ : 90+
+and classified skills into:
 
-A  : 80+
+- Strengths
 
-B  : 70+
+- Weaknesses
 
-C  : 60+
+## Additional Features
 
-D  : 50+
+Generated a summary explaining:
 
-Needs Improvement : <50
+- Number of strengths
 
-## Analysis Components
-
-- Skill Matching
-
-- Missing Skill Count
-
-- Resume Score
-
-- Grade Assignment
+- Number of weaknesses
 
 ## Key Learnings
 
-- Scoring systems
+- Explainable recommendation systems
 
-- Ranking algorithms
+- Feedback generation
 
-- Quantifying resume strength
+- Skill classification
 
-- Career-specific evaluation
+- User-centric analysis
 
 ## CareerForge Evolution
 
@@ -1002,3 +1046,5 @@ Resume
 → Job Matching
 
 → Resume Scoring
+
+→ Strengths & Weaknesses Feedback

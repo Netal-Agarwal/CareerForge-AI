@@ -24,7 +24,8 @@ from parser import (
     generate_learning_roadmap,
     match_job_roles,
     calculate_resume_score,
-    get_grade
+    get_grade,
+    generate_feedback
 )
 
 from fastapi import Query
@@ -626,4 +627,44 @@ def resume_score(
         "grade": grade,
         "matched_skills": len(skills),
         "missing_skills": len(missing_skills)
+    }
+
+
+@app.get(
+    "/resume-feedback",
+    tags=["Career Analysis"]
+)
+def resume_feedback(
+    career_track: str = Query(...),
+
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    skills = extract_skills(text)
+
+    feedback = generate_feedback(
+        skills,
+        career_track
+    )
+
+    return {
+    "strengths": feedback["strengths"],
+    "weaknesses": feedback["weaknesses"],
+    "summary":
+        f"You have {len(feedback['strengths'])} relevant skills and need to improve {len(feedback['weaknesses'])} skills."
     }
