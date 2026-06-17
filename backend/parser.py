@@ -303,3 +303,18 @@ def generate_feedback(
         "strengths": strengths,
         "weaknesses": weaknesses
     }
+
+def generate_summary(
+    score,
+    strengths,
+    weaknesses
+):
+
+    return (
+        f"Your resume scored {score}/100. "
+        f"You are strong in {', '.join(strengths[:3])}. "
+        f"You should improve {', '.join(weaknesses[:3])} "
+        f"to increase your employability."
+    )
+
+    
