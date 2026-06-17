@@ -304,6 +304,23 @@ def upload_resume(
             file.file.read()
         )
 
+    # CHECK IF USER ALREADY HAS A RESUME
+    existing_resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if existing_resume:
+
+        existing_resume.file_name = file.filename
+        existing_resume.file_path = file_path
+
+        db.commit()
+
+        return {
+            "message": "Resume updated successfully"
+        }
+
+    # CREATE NEW RESUME RECORD
     resume = Resume(
         user_id=current_user.id,
         file_name=file.filename,
@@ -316,5 +333,30 @@ def upload_resume(
     return {
         "message": "Resume uploaded successfully",
         "file_name": file.filename
+    }
+
+
+@app.get(
+    "/resume",
+    tags=["Resume"]
+)
+def get_resume(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    return {
+        "file_name": resume.file_name,
+        "file_path": resume.file_path
     }
 

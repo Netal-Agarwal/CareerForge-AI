@@ -528,10 +528,6 @@ Users can only delete their own data.
 - Protecting delete operations with JWT authentication
 - Validating resource existence before deletion
 
-
-
-
-
 # Week 3 Day 5
 
 ## Resume Upload System
@@ -592,4 +588,60 @@ Only authenticated users can upload resumes.
 - Database tracking for uploaded files
 - File type validation
 - Connecting uploaded files to authenticated users
+
+
+
+
+
+# Week 3 Day 6
+
+## Resume Retrieval API
+
+Implemented:
+
+GET /resume
+
+to retrieve uploaded resume information for the authenticated user.
+
+## Resume Management
+
+Enhanced the upload functionality to prevent duplicate resume records.
+
+Each user now maintains a single active resume record.
+
+## SQLAlchemy Queries
+
+Used:
+
+db.query(Resume)  
+.filter(Resume.user_id == current_[user.id](http://user.id))  
+.first()
+
+to retrieve resume information.
+
+## Resume Update Logic
+
+Before creating a new resume record, the system checks if a resume already exists for the user.
+
+If found:
+
+- File name is updated
+- File path is updated
+- Database changes are committed
+
+This ensures only one active resume per user.
+
+## Authentication
+
+Resume retrieval and management are protected using JWT authentication.
+
+Users can only access their own resume information.
+
+## Key Learnings
+
+- File metadata management
+- Updating existing database records
+- Preventing duplicate records
+- Building user-specific APIs
+- Integrating file uploads with database storage
 
