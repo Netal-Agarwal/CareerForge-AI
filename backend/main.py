@@ -11,8 +11,16 @@ from schemas import UserCreate, UserLogin, ProfileCreate
 
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
+from parser import extract_text_from_pdf
+
 from fastapi import UploadFile, File
 import os
+
+from parser import (
+    extract_text_from_pdf,
+    extract_email,
+    extract_skills
+)
 
 Base.metadata.create_all(bind=engine)
 
@@ -360,3 +368,58 @@ def get_resume(
         "file_path": resume.file_path
     }
 
+
+@app.get("/test-parser")
+def test_parser(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        return {
+            "error": "Resume not found"
+        }
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    return {
+        "content": text[:1000]
+    }
+
+@app.get(
+    "/parse-resume",
+    tags=["Resume"]
+)
+def parse_resume(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    email = extract_email(text)
+
+    skills = extract_skills(text)
+
+    return {
+        "email": email,
+        "skills": skills
+    }

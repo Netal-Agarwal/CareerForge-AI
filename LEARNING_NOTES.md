@@ -589,10 +589,6 @@ Only authenticated users can upload resumes.
 - File type validation
 - Connecting uploaded files to authenticated users
 
-
-
-
-
 # Week 3 Day 6
 
 ## Resume Retrieval API
@@ -644,4 +640,48 @@ Users can only access their own resume information.
 - Preventing duplicate records
 - Building user-specific APIs
 - Integrating file uploads with database storage
+
+
+
+# Week 3 Day 7
+
+## Resume Parsing Engine
+
+Implemented:
+
+GET /parse-resume
+
+to extract structured information from uploaded resumes.
+
+## PDF Processing
+
+Used:
+
+PyPDF2
+
+to read and extract text from PDF documents.
+
+## Information Extraction
+
+Implemented:
+
+- Email Extraction
+- Skill Extraction
+
+using regular expressions and predefined skill matching.
+
+## Resume Pipeline
+
+Resume Upload  
+→ PDF Parsing  
+→ Text Extraction  
+→ Information Extraction
+
+## Key Learnings
+
+- PDF text extraction
+- Regular expressions
+- Basic NLP preprocessing
+- Converting unstructured text into structured data
+- Building the foundation for AI-powered resume analysis
 
