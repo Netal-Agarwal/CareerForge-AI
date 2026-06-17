@@ -683,8 +683,6 @@ Resume Upload
 - Converting unstructured text into structured data
 - Building the foundation for AI-powered resume analysis
 
-
-
 # Week 4 Day 1
 
 ## Resume Skill Analysis Engine
@@ -700,7 +698,6 @@ to analyze extracted resume skills against a predefined backend developer skill 
 Compared:
 
 - Extracted Skills
-
 - Target Industry Skills
 
 and identified missing competencies.
@@ -718,11 +715,8 @@ Resume Upload
 ## Key Learnings
 
 - Comparing structured datasets
-
 - Building recommendation foundations
-
 - Skill gap detection logic
-
 - Converting resume data into actionable insights
 
 ## Future Applications
@@ -730,10 +724,57 @@ Resume Upload
 This skill gap engine will later power:
 
 - Learning Recommendations
-
 - Job Matching
-
 - Career Roadmaps
-
 - Interview Preparation Suggestions
+
+
+
+# Week 4 Day 2
+
+## Personalized Learning Roadmap
+
+Implemented:
+
+GET /learning-roadmap
+
+to generate a prioritized learning path based on missing resume skills.
+
+## Recommendation Engine
+
+Compared:
+
+- Existing Skills
+
+- Missing Skills
+
+and generated learning recommendations.
+
+## Learning Prioritization
+
+Each missing skill is assigned:
+
+- Priority
+
+- Recommended Learning Resource
+
+## Key Learnings
+
+- Recommendation systems
+
+- Prioritization logic
+
+- Skill progression mapping
+
+- Transforming analysis into actionable advice
+
+## CareerForge Evolution
+
+Resume
+
+→ Skill Analysis
+
+→ Skill Gap Detection
+
+→ Learning Roadmap
 

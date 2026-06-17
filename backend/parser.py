@@ -73,3 +73,51 @@ def find_missing_skills(
             missing_skills.append(skill)
 
     return missing_skills
+
+LEARNING_PATHS = {
+    "Git": {
+        "priority": 1,
+        "resource": "Git Basics"
+    },
+    "Docker": {
+        "priority": 2,
+        "resource": "Docker Fundamentals"
+    },
+    "AWS": {
+        "priority": 3,
+        "resource": "AWS Cloud Practitioner"
+    },
+    "Redis": {
+        "priority": 4,
+        "resource": "Redis Fundamentals"
+    },
+    "CI/CD": {
+        "priority": 5,
+        "resource": "CI/CD Pipelines"
+    }
+}
+
+
+def generate_learning_roadmap(
+    missing_skills
+):
+
+    roadmap = []
+
+    for skill in missing_skills:
+
+        if skill in LEARNING_PATHS:
+
+            roadmap.append(
+                {
+                    "skill": skill,
+                    "priority": LEARNING_PATHS[skill]["priority"],
+                    "resource": LEARNING_PATHS[skill]["resource"]
+                }
+            )
+
+    roadmap.sort(
+        key=lambda x: x["priority"]
+    )
+
+    return roadmap

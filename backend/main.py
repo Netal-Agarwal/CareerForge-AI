@@ -20,7 +20,8 @@ from parser import (
     extract_text_from_pdf,
     extract_email,
     extract_skills,
-    find_missing_skills
+    find_missing_skills,
+    generate_learning_roadmap
 )
 
 Base.metadata.create_all(bind=engine)
@@ -458,4 +459,42 @@ def analyze_resume(
     return {
         "existing_skills": skills,
         "missing_skills": missing_skills
+    }
+
+
+@app.get(
+    "/learning-roadmap",
+    tags=["Resume Analysis"]
+)
+def learning_roadmap(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    skills = extract_skills(text)
+
+    missing_skills = find_missing_skills(
+        skills
+    )
+
+    roadmap = generate_learning_roadmap(
+        missing_skills
+    )
+
+    return {
+        "roadmap": roadmap
     }
