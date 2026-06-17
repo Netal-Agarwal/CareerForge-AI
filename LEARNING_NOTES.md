@@ -286,8 +286,6 @@ Added JWT authentication support inside Swagger UI.
 
 can now be tested directly from Swagger after authorization.
 
-
-
 # Week 2 Day 7
 
 ## Professional API Design
@@ -309,3 +307,90 @@ Moved JWT settings to [config.py](http://config.py).
 ## Health Check
 
 Added /health endpoint for monitoring.
+
+
+
+
+
+# Week 3 Day 1
+
+## User Profile System
+
+Implemented a dedicated Profile model to store user career-related information separately from authentication data.
+
+### Profile Fields
+
+- Full Name
+- College
+- Degree
+- Graduation Year
+- Skills
+
+## Database Design
+
+Created a new `profiles` table in PostgreSQL using SQLAlchemy ORM.
+
+### Tables
+
+- users
+- profiles
+
+Each profile is linked to a specific user using `user_id`.
+
+## Protected Profile Creation
+
+Implemented a protected API endpoint:
+
+POST `/profile`
+
+Only authenticated users with a valid JWT token can create a profile.
+
+## FastAPI Concepts Learned
+
+### Dependency Injection
+
+Used:
+
+```python
+Depends(get_db)
+Depends(get_current_user)
+
+```
+
+to access the database session and authenticated user.
+
+### Request Validation
+
+Created a Pydantic schema:
+
+```python
+ProfileCreate
+
+```
+
+to validate incoming profile data.
+
+### Authorization
+
+Used JWT authentication to ensure only logged-in users can create profiles.
+
+## Debugging Experience
+
+Encountered login failures caused by old users whose passwords were stored in plain text before password hashing was implemented.
+
+Resolved by:
+
+1. Removing old user records.
+2. Re-registering users.
+3. Verifying bcrypt hashes were stored in the database.
+4. Successfully authenticating and generating JWT tokens.
+
+## Key Takeaways
+
+- Authentication data and profile data should be stored separately.
+- SQLAlchemy models automatically generate database tables.
+- JWT authentication can protect business-specific APIs.
+- Proper password hashing is critical for secure authentication systems.
+
+
+

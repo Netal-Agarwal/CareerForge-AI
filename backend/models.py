@@ -10,3 +10,20 @@ class User(Base):
     name = Column(String)
     email = Column(String, unique=True)
     password = Column(String)
+
+class Profile(Base):
+    __tablename__ = "profiles"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    user_id = Column(Integer, unique=True)
+
+    full_name = Column(String)
+
+    college = Column(String)
+
+    degree = Column(String)
+
+    graduation_year = Column(Integer)
+
+    skills = Column(String)

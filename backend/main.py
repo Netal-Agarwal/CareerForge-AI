@@ -6,8 +6,8 @@ from jwt_handler import create_access_token, verify_token
 from auth import hash_password, verify_password
 
 from database import engine, SessionLocal
-from models import Base, User
-from schemas import UserCreate, UserLogin
+from models import Base, User, Profile
+from schemas import UserCreate, UserLogin, ProfileCreate
 
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
@@ -168,4 +168,41 @@ def get_me(
 def health():
     return {
         "status": "healthy"
+    }
+
+@app.post(
+    "/profile",
+    tags=["Users"]
+)
+def create_profile(
+    profile: ProfileCreate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    existing_profile = db.query(Profile).filter(
+        Profile.user_id == current_user.id
+    ).first()
+
+    if existing_profile:
+        raise HTTPException(
+            status_code=400,
+            detail="Profile already exists"
+        )
+
+    new_profile = Profile(
+        user_id=current_user.id,
+        full_name=profile.full_name,
+        college=profile.college,
+        degree=profile.degree,
+        graduation_year=profile.graduation_year,
+        skills=profile.skills
+    )
+
+    db.add(new_profile)
+    db.commit()
+    db.refresh(new_profile)
+
+    return {
+        "message": "Profile created successfully"
     }
