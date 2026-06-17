@@ -158,3 +158,79 @@ def generate_learning_roadmap(
     )
 
     return roadmap
+
+
+JOB_ROLE_SKILLS = {
+
+    "Backend Developer": [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Docker"
+    ],
+
+    "Data Scientist": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "Machine Learning"
+    ],
+
+    "DevOps Engineer": [
+        "Docker",
+        "AWS",
+        "Linux",
+        "CI/CD"
+    ],
+
+    "Full Stack Developer": [
+        "React",
+        "Node.js",
+        "JavaScript",
+        "MongoDB"
+    ],
+
+    "Software Engineer Intern": [
+        "Python",
+        "Git"
+    ]
+}
+
+
+def match_job_roles(
+    extracted_skills
+):
+
+    matched_roles = []
+
+    for role, required_skills in JOB_ROLE_SKILLS.items():
+
+        matched_count = 0
+
+        for skill in required_skills:
+
+            if skill in extracted_skills:
+                matched_count += 1
+
+        score = round(
+            (matched_count / len(required_skills)) * 100,
+            2
+        )
+
+        if score >= 40:
+
+            matched_roles.append(
+                {
+                    "role": role,
+                    "match_score": score
+                }
+            )
+
+    matched_roles.sort(
+        key=lambda x: x["match_score"],
+        reverse=True
+    )
+
+    return matched_roles
+
+    

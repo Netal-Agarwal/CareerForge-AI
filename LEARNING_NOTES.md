@@ -771,10 +771,6 @@ Resume
 
 → Learning Roadmap
 
-
-
-
-
 # Week 4 Day 3
 
 ## Career Track Recommendation Engine
@@ -788,11 +784,8 @@ to generate skill-gap analysis for different career paths.
 ## Supported Career Tracks
 
 - Backend Developer
-
 - Data Scientist
-
 - DevOps Engineer
-
 - Full Stack Developer
 
 ## Dynamic Skill Analysis
@@ -810,11 +803,8 @@ as a dynamic API parameter.
 ## Key Learnings
 
 - Dynamic recommendation systems
-
 - Query parameters in FastAPI
-
 - Career-specific analysis
-
 - Flexible skill gap detection
 
 ## CareerForge Evolution
@@ -828,3 +818,67 @@ Resume
 → Skill Gap Analysis
 
 → Personalized Learning Roadmap
+
+
+
+
+
+# Week 4 Day 4
+
+## Job Role Matching Engine
+
+Implemented:
+
+GET /job-matches
+
+to recommend suitable job roles based on extracted resume skills.
+
+## Role Matching Logic
+
+Compared:
+
+- User Skills
+
+- Role Skill Requirements
+
+and generated a compatibility score.
+
+## Match Scoring
+
+Score Formula:
+
+(match_count / total_required_skills) * 100
+
+## Supported Roles
+
+- Backend Developer
+
+- Data Scientist
+
+- DevOps Engineer
+
+- Full Stack Developer
+
+- Software Engineer Intern
+
+## Key Learnings
+
+- Similarity scoring
+
+- Recommendation systems
+
+- Skill-role mapping
+
+- Ranking algorithms
+
+## CareerForge Evolution
+
+Resume
+
+→ Skill Extraction
+
+→ Career Analysis
+
+→ Learning Roadmap
+
+→ Job Role Matching

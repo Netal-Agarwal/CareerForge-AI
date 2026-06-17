@@ -21,7 +21,8 @@ from parser import (
     extract_email,
     extract_skills,
     find_missing_skills,
-    generate_learning_roadmap
+    generate_learning_roadmap,
+    match_job_roles
 )
 
 from fastapi import Query
@@ -541,4 +542,39 @@ def career_analysis(
         "career_track": career_track,
         "existing_skills": skills,
         "missing_skills": missing_skills
+    }
+
+
+@app.get(
+    "/job-matches",
+    tags=["Career Analysis"]
+)
+def job_matches(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    skills = extract_skills(text)
+
+    matches = match_job_roles(
+        skills
+    )
+
+    return {
+        "skills": skills,
+        "recommended_roles": matches
     }
