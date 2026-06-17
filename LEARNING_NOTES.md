@@ -388,8 +388,6 @@ Resolved by:
 - JWT authentication can protect business-specific APIs.
 - Proper password hashing is critical for secure authentication systems.
 
-
-
 # Week 3 Day 2
 
 ## Profile Retrieval API
@@ -439,4 +437,50 @@ Profile retrieval is protected using JWT authentication and only returns data be
 - Filtering records with conditions
 - Returning structured JSON responses
 - Combining JWT authentication with database operations
+
+
+
+# Week 3 Day 3
+
+## Profile Update API
+
+Implemented:
+
+PUT /profile
+
+to allow authenticated users to update their profile information.
+
+## CRUD Operations
+
+Implemented the UPDATE operation.
+
+Current CRUD Progress:
+
+- Create Profile ✅
+- Read Profile ✅
+- Update Profile ✅
+- Delete Profile ⏳
+
+## SQLAlchemy Updates
+
+Retrieved an existing profile record and modified its fields before committing changes to PostgreSQL.
+
+Used:
+
+db.commit()
+
+to persist updates.
+
+## Authentication
+
+Profile updates are protected using JWT authentication.
+
+Users can only update their own profiles.
+
+## Key Learnings
+
+- Updating existing records using SQLAlchemy ORM
+- Persisting changes with db.commit()
+- Implementing authenticated update operations
+- Completing Create, Read, and Update functionality
 

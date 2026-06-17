@@ -208,3 +208,35 @@ def get_profile(
         "graduation_year": profile.graduation_year,
         "skills": profile.skills
     }
+
+@app.put(
+    "/profile",
+    tags=["Users"]
+)
+def update_profile(
+    profile_data: ProfileCreate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    profile = db.query(Profile).filter(
+        Profile.user_id == current_user.id
+    ).first()
+
+    if not profile:
+        raise HTTPException(
+            status_code=404,
+            detail="Profile not found"
+        )
+
+    profile.full_name = profile_data.full_name
+    profile.college = profile_data.college
+    profile.degree = profile_data.degree
+    profile.graduation_year = profile_data.graduation_year
+    profile.skills = profile_data.skills
+
+    db.commit()
+
+    return {
+        "message": "Profile updated successfully"
+    }
