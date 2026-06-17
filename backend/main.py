@@ -19,7 +19,8 @@ import os
 from parser import (
     extract_text_from_pdf,
     extract_email,
-    extract_skills
+    extract_skills,
+    find_missing_skills
 )
 
 Base.metadata.create_all(bind=engine)
@@ -422,4 +423,39 @@ def parse_resume(
     return {
         "email": email,
         "skills": skills
+    }
+
+
+@app.get(
+    "/analyze-resume",
+    tags=["Resume Analysis"]
+)
+def analyze_resume(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    skills = extract_skills(text)
+
+    missing_skills = find_missing_skills(
+        skills
+    )
+
+    return {
+        "existing_skills": skills,
+        "missing_skills": missing_skills
     }

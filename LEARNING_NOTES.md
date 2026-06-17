@@ -641,8 +641,6 @@ Users can only access their own resume information.
 - Building user-specific APIs
 - Integrating file uploads with database storage
 
-
-
 # Week 3 Day 7
 
 ## Resume Parsing Engine
@@ -684,4 +682,58 @@ Resume Upload
 - Basic NLP preprocessing
 - Converting unstructured text into structured data
 - Building the foundation for AI-powered resume analysis
+
+
+
+# Week 4 Day 1
+
+## Resume Skill Analysis Engine
+
+Implemented:
+
+GET /analyze-resume
+
+to analyze extracted resume skills against a predefined backend developer skill framework.
+
+## Skill Gap Analysis
+
+Compared:
+
+- Extracted Skills
+
+- Target Industry Skills
+
+and identified missing competencies.
+
+## Analysis Workflow
+
+Resume Upload
+
+→ Resume Parsing
+
+→ Skill Extraction
+
+→ Skill Gap Analysis
+
+## Key Learnings
+
+- Comparing structured datasets
+
+- Building recommendation foundations
+
+- Skill gap detection logic
+
+- Converting resume data into actionable insights
+
+## Future Applications
+
+This skill gap engine will later power:
+
+- Learning Recommendations
+
+- Job Matching
+
+- Career Roadmaps
+
+- Interview Preparation Suggestions
 

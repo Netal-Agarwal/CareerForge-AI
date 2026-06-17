@@ -47,3 +47,29 @@ def extract_skills(text):
             found_skills.append(skill)
 
     return found_skills
+
+
+TARGET_BACKEND_SKILLS = [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Docker",
+    "AWS",
+    "Redis",
+    "Git",
+    "CI/CD"
+]
+
+
+def find_missing_skills(
+    extracted_skills
+):
+
+    missing_skills = []
+
+    for skill in TARGET_BACKEND_SKILLS:
+
+        if skill not in extracted_skills:
+            missing_skills.append(skill)
+
+    return missing_skills
