@@ -27,3 +27,14 @@ class Profile(Base):
     graduation_year = Column(Integer)
 
     skills = Column(String)
+
+class Resume(Base):
+    __tablename__ = "resumes"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    user_id = Column(Integer)
+
+    file_name = Column(String)
+
+    file_path = Column(String)

@@ -6,11 +6,13 @@ from jwt_handler import create_access_token, verify_token
 from auth import hash_password, verify_password
 
 from database import engine, SessionLocal
-from models import Base, User, Profile
+from models import Base, User, Profile, Resume
 from schemas import UserCreate, UserLogin, ProfileCreate
 
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
+from fastapi import UploadFile, File
+import os
 
 Base.metadata.create_all(bind=engine)
 
@@ -268,3 +270,51 @@ def delete_profile(
     return {
         "message": "Profile deleted successfully"
     }
+
+@app.post(
+    "/upload-resume",
+    tags=["Resume"]
+)
+def upload_resume(
+    file: UploadFile = File(...),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    if not file.filename.endswith(".pdf"):
+        raise HTTPException(
+            status_code=400,
+            detail="Only PDF files allowed"
+        )
+
+    upload_dir = "uploads"
+
+    os.makedirs(
+        upload_dir,
+        exist_ok=True
+    )
+
+    file_path = os.path.join(
+        upload_dir,
+        file.filename
+    )
+
+    with open(file_path, "wb") as buffer:
+        buffer.write(
+            file.file.read()
+        )
+
+    resume = Resume(
+        user_id=current_user.id,
+        file_name=file.filename,
+        file_path=file_path
+    )
+
+    db.add(resume)
+    db.commit()
+
+    return {
+        "message": "Resume uploaded successfully",
+        "file_name": file.filename
+    }
+

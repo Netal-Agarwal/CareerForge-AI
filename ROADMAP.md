@@ -14,7 +14,7 @@
 
 - [x] Database Setup
 
-- [ ] JWT Authentication
+- [x] JWT Authentication
 
 ## Week 2
 

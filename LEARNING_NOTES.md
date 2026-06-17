@@ -482,8 +482,6 @@ Users can only update their own profiles.
 - Implementing authenticated update operations
 - Completing Create, Read, and Update functionality
 
-
-
 # Week 3 Day 4
 
 ## Profile Delete API
@@ -529,4 +527,69 @@ Users can only delete their own data.
 - Completing the CRUD lifecycle
 - Protecting delete operations with JWT authentication
 - Validating resource existence before deletion
+
+
+
+
+
+# Week 3 Day 5
+
+## Resume Upload System
+
+Implemented:
+
+POST /upload-resume
+
+to allow authenticated users to upload PDF resumes.
+
+## File Uploads in FastAPI
+
+Used:
+
+- UploadFile
+- File
+
+for handling uploaded files.
+
+## Resume Storage
+
+Created a new Resume model.
+
+Stored:
+
+- user_id
+- file_name
+- file_path
+
+in PostgreSQL.
+
+## Local File Storage
+
+Uploaded resumes are saved inside:
+
+backend/uploads
+
+directory.
+
+## Validation
+
+Only PDF files are accepted.
+
+Invalid file types return:
+
+400 Bad Request
+
+## Authentication
+
+Resume uploads are protected using JWT authentication.
+
+Only authenticated users can upload resumes.
+
+## Key Learnings
+
+- File uploads with FastAPI
+- Local file storage
+- Database tracking for uploaded files
+- File type validation
+- Connecting uploaded files to authenticated users
 
