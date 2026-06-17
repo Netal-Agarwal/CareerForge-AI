@@ -438,8 +438,6 @@ Profile retrieval is protected using JWT authentication and only returns data be
 - Returning structured JSON responses
 - Combining JWT authentication with database operations
 
-
-
 # Week 3 Day 3
 
 ## Profile Update API
@@ -483,4 +481,52 @@ Users can only update their own profiles.
 - Persisting changes with db.commit()
 - Implementing authenticated update operations
 - Completing Create, Read, and Update functionality
+
+
+
+# Week 3 Day 4
+
+## Profile Delete API
+
+Implemented:
+
+DELETE /profile
+
+to allow authenticated users to remove their profile.
+
+## CRUD Completion
+
+Completed all CRUD operations.
+
+### CRUD Status
+
+- Create Profile ✅
+- Read Profile ✅
+- Update Profile ✅
+- Delete Profile ✅
+
+## SQLAlchemy Delete Operation
+
+Used:
+
+db.delete(profile)
+
+to remove records from PostgreSQL.
+
+Persisted changes using:
+
+db.commit()
+
+## Authentication
+
+Only authenticated users can delete their profiles.
+
+Users can only delete their own data.
+
+## Key Learnings
+
+- Deleting records with SQLAlchemy ORM
+- Completing the CRUD lifecycle
+- Protecting delete operations with JWT authentication
+- Validating resource existence before deletion
 

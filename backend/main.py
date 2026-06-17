@@ -240,3 +240,31 @@ def update_profile(
     return {
         "message": "Profile updated successfully"
     }
+
+
+@app.delete(
+    "/profile",
+    tags=["Users"]
+)
+def delete_profile(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    profile = db.query(Profile).filter(
+        Profile.user_id == current_user.id
+    ).first()
+
+    if not profile:
+        raise HTTPException(
+            status_code=404,
+            detail="Profile not found"
+        )
+
+    db.delete(profile)
+
+    db.commit()
+
+    return {
+        "message": "Profile deleted successfully"
+    }
