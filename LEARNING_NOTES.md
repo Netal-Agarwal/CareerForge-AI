@@ -308,10 +308,6 @@ Moved JWT settings to [config.py](http://config.py).
 
 Added /health endpoint for monitoring.
 
-
-
-
-
 # Week 3 Day 1
 
 ## User Profile System
@@ -393,4 +389,54 @@ Resolved by:
 - Proper password hashing is critical for secure authentication systems.
 
 
+
+# Week 3 Day 2
+
+## Profile Retrieval API
+
+Implemented a protected endpoint:
+
+GET /profile
+
+which retrieves profile information for the currently authenticated user.
+
+## SQLAlchemy Queries
+
+Used:
+
+db.query(Profile).filter(  
+Profile.user_id == current_[user.id](http://user.id)  
+).first()
+
+to fetch profile data from PostgreSQL.
+
+## CRUD Operations
+
+Implemented the READ operation of CRUD.
+
+Current CRUD Progress:
+
+- Create Profile ✅
+- Read Profile ✅
+- Update Profile ⏳
+- Delete Profile ⏳
+
+## Error Handling
+
+Returns:
+
+404 Not Found
+
+when a profile does not exist for the authenticated user.
+
+## Authentication Integration
+
+Profile retrieval is protected using JWT authentication and only returns data belonging to the logged-in user.
+
+## Key Learnings
+
+- Querying data using SQLAlchemy ORM
+- Filtering records with conditions
+- Returning structured JSON responses
+- Combining JWT authentication with database operations
 

@@ -135,31 +135,6 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
         "token_type": "bearer"
     }
 
-@app.get(
-    "/profile",
-    tags=["Users"]
-)
-def profile(
-    current_user: str = Depends(get_current_user)
-):
-
-    return {
-        "message": "Protected route accessed",
-        "email": current_user
-    }
-
-@app.get(
-    "/me",
-    tags=["Users"]
-)
-def get_me(
-    current_user: User = Depends(get_current_user)
-):
-    return {
-        "id": current_user.id,
-        "name": current_user.name,
-        "email": current_user.email
-    }
 
 @app.get(
     "/health",
@@ -205,4 +180,31 @@ def create_profile(
 
     return {
         "message": "Profile created successfully"
+    }
+
+@app.get(
+    "/profile",
+    tags=["Users"]
+)
+def get_profile(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    profile = db.query(Profile).filter(
+        Profile.user_id == current_user.id
+    ).first()
+
+    if not profile:
+        raise HTTPException(
+            status_code=404,
+            detail="Profile not found"
+        )
+
+    return {
+        "full_name": profile.full_name,
+        "college": profile.college,
+        "degree": profile.degree,
+        "graduation_year": profile.graduation_year,
+        "skills": profile.skills
     }
