@@ -1039,8 +1039,6 @@ Resume
 
 → Strengths & Weaknesses Feedback
 
-
-
 # Week 4 Day 7
 
 ## Career Report Generator
@@ -1052,13 +1050,9 @@ GET /career-report
 which combines:
 
 - Resume Score
-
 - Skill Analysis
-
 - Feedback
-
 - Job Matching
-
 - Learning Roadmap
 
 into a single report.
@@ -1068,19 +1062,14 @@ into a single report.
 Created automated report summaries explaining:
 
 - Resume strengths
-
 - Weaknesses
-
 - Improvement opportunities
 
 ## Key Learnings
 
 - Aggregating multiple services
-
 - Report generation
-
 - Data composition
-
 - User-centric API design
 
 ## CareerForge Evolution
@@ -1100,3 +1089,53 @@ Resume
 → Learning Roadmap
 
 → Career Report
+
+
+
+
+
+# Week 5 Day 1
+
+## ATS Score Calculator
+
+Implemented:
+
+POST /ats-score
+
+to compare resume skills with job description requirements.
+
+## ATS Analysis
+
+Generated:
+
+- ATS Score
+
+- Matched Keywords
+
+- Missing Keywords
+
+## Keyword Matching Formula
+
+ATS Score:
+
+(matched_keywords / total_job_keywords) * 100
+
+## Key Learnings
+
+- Resume-job comparison
+
+- Keyword extraction
+
+- ATS simulation
+
+- Matching algorithms
+
+## CareerForge Evolution
+
+Resume
+
+→ Skill Extraction
+
+→ Career Report
+
+→ ATS Analysis

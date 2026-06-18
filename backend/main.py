@@ -26,7 +26,9 @@ from parser import (
     calculate_resume_score,
     get_grade,
     generate_feedback,
-    generate_summary
+    generate_summary,
+    calculate_ats_score,
+    extract_job_skills
 )
 
 from fastapi import Query
@@ -753,4 +755,44 @@ def career_report(
             roadmap
 
     }
+
+@app.post(
+    "/ats-score",
+    tags=["ATS Analysis"]
+)
+def ats_score(
+    job_description: str,
+
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    resume_skills = extract_skills(text)
+
+    job_skills = extract_job_skills(
+        job_description
+    )
+
+    result = calculate_ats_score(
+        resume_skills,
+        job_skills
+    )
+
+    return result
+
+
 

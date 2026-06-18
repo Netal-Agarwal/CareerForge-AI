@@ -317,4 +317,60 @@ def generate_summary(
         f"to increase your employability."
     )
 
-    
+def calculate_ats_score(
+    resume_skills,
+    job_skills
+):
+
+    matched_keywords = []
+
+    missing_keywords = []
+
+    for skill in job_skills:
+
+        if skill in resume_skills:
+            matched_keywords.append(skill)
+        else:
+            missing_keywords.append(skill)
+
+    if len(job_skills) == 0:
+        score = 0
+    else:
+        score = round(
+            (len(matched_keywords) / len(job_skills)) * 100
+        )
+
+    return {
+        "ats_score": score,
+        "matched_keywords": matched_keywords,
+        "missing_keywords": missing_keywords
+    }
+
+def extract_job_skills(
+    job_description
+):
+
+    skills_db = [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Docker",
+        "AWS",
+        "Redis",
+        "Git",
+        "CI/CD",
+        "React",
+        "Node.js",
+        "MongoDB",
+        "Linux",
+        "Kubernetes"
+    ]
+
+    found_skills = []
+
+    for skill in skills_db:
+
+        if skill.lower() in job_description.lower():
+            found_skills.append(skill)
+
+    return found_skills
