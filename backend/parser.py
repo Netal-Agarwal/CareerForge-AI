@@ -617,6 +617,77 @@ def optimize_keywords(
 
 
 
+LEARNING_RESOURCES = {
+
+    "Python":
+        "https://www.python.org/about/gettingstarted/",
+
+    "FastAPI":
+        "https://fastapi.tiangolo.com/tutorial/",
+
+    "PostgreSQL":
+        "https://www.postgresql.org/docs/",
+
+    "Docker":
+        "https://docs.docker.com/get-started/",
+
+    "AWS":
+        "https://aws.amazon.com/training/",
+
+    "MongoDB":
+        "https://learn.mongodb.com/",
+
+    "Git":
+        "https://git-scm.com/doc",
+
+    "Redis":
+        "https://redis.io/docs/",
+
+    "CI/CD":
+        "https://www.atlassian.com/continuous-delivery",
+
+    "React":
+        "https://react.dev/learn",
+
+    "Node.js":
+        "https://nodejs.org/en/learn"
+}
+
+
+
+def generate_learning_recommendations(
+    missing_skills
+):
+
+    recommendations = []
+
+    priority = 1
+
+    for skill in missing_skills:
+
+        recommendations.append({
+            "skill": skill,
+
+            "priority": priority,
+
+            "estimated_days":
+                priority * 7,
+
+            "resource":
+                LEARNING_RESOURCES.get(
+                    skill,
+                    "Resource not available"
+                )
+        })
+
+        priority += 1
+
+    return recommendations
+
+
+
+
+
 
 
 

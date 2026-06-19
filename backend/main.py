@@ -33,7 +33,8 @@ from parser import (
     generate_interview_questions,
     analyze_job_fit,
     generate_fit_summary,
-    optimize_keywords
+    optimize_keywords,
+    generate_learning_recommendations
 )
 
 from fastapi import Query
@@ -978,6 +979,62 @@ def keyword_optimizer(
     )
 
     return result
+
+
+@app.get(
+    "/learning-recommendations",
+    tags=["Learning"]
+)
+def learning_recommendations(
+    career_track: str,
+
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    skills = extract_skills(text)
+
+    missing_skills = find_missing_skills(
+        skills,
+        career_track
+    )
+
+    recommendations = (
+        generate_learning_recommendations(
+            missing_skills
+        )
+    )
+
+    return {
+        "career_track":
+            career_track,
+
+        "current_skills":
+            skills,
+
+        "missing_skills":
+            missing_skills,
+
+        "learning_plan":
+            recommendations
+    }
+
+
+
 
 
 

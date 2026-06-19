@@ -1268,10 +1268,6 @@ Resume
 
 → Job Fit Analysis
 
-
-
-
-
 # Week 5 Day 5
 
 ## Resume Keyword Optimizer
@@ -1287,9 +1283,7 @@ to identify missing ATS keywords.
 Generated:
 
 - Recommended Keywords
-
 - Priority Keywords
-
 - Keyword Count
 
 ## Workflow
@@ -1307,11 +1301,8 @@ Resume
 ## Key Learnings
 
 - ATS keyword analysis
-
 - Resume optimization
-
 - Recommendation systems
-
 - Skill prioritization
 
 ## CareerForge Evolution
@@ -1327,3 +1318,65 @@ Resume
 → Job Fit Analysis
 
 → Keyword Optimization
+
+
+
+
+
+# Week 5 Day 6
+
+## Personalized Learning Recommendations
+
+Implemented:
+
+GET /learning-recommendations
+
+to recommend learning resources for missing skills.
+
+## Features
+
+Generated:
+
+- Missing Skills
+
+- Learning Priorities
+
+- Resource Recommendations
+
+- Learning Roadmap
+
+## Workflow
+
+Resume
+
+→ Skill Extraction
+
+→ Skill Gap Analysis
+
+→ Learning Recommendations
+
+## Key Learnings
+
+- Recommendation systems
+
+- Personalized learning paths
+
+- Skill gap analysis
+
+- Resource mapping
+
+## CareerForge Evolution
+
+Resume
+
+→ ATS Analysis
+
+→ Resume Suggestions
+
+→ Interview Questions
+
+→ Job Fit Analysis
+
+→ Keyword Optimization
+
+→ Learning Recommendations
