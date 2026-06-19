@@ -518,6 +518,65 @@ def generate_interview_questions(
     return questions
 
 
+def get_fit_level(score):
+
+    if score >= 80:
+        return "Excellent Match"
+
+    elif score >= 60:
+        return "Good Match"
+
+    elif score >= 40:
+        return "Moderate Match"
+
+    return "Low Match"
+
+def analyze_job_fit(
+    resume_skills,
+    job_skills
+):
+
+    matched = []
+
+    missing = []
+
+    for skill in job_skills:
+
+        if skill in resume_skills:
+            matched.append(skill)
+        else:
+            missing.append(skill)
+
+    if len(job_skills) == 0:
+        score = 0
+    else:
+        score = round(
+            (len(matched) / len(job_skills)) * 100
+        )
+
+    return {
+        "fit_percentage": score,
+        "matched_skills": matched,
+        "missing_skills": missing,
+        "fit_level": get_fit_level(score)
+    }
+
+def generate_fit_summary(
+    score,
+    matched,
+    missing
+):
+
+    return (
+        f"Your resume matches "
+        f"{score}% of the job requirements. "
+        f"You already have "
+        f"{len(matched)} required skills. "
+        f"You should improve "
+        f"{len(missing)} skills to become a stronger candidate."
+    )
+
+
 
 
 
