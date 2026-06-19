@@ -28,7 +28,8 @@ from parser import (
     generate_feedback,
     generate_summary,
     calculate_ats_score,
-    extract_job_skills
+    extract_job_skills,
+    generate_resume_suggestions
 )
 
 from fastapi import Query
@@ -793,6 +794,61 @@ def ats_score(
     )
 
     return result
+
+
+@app.post(
+    "/resume-suggestions",
+    tags=["ATS Analysis"]
+)
+def resume_suggestions(
+    job_description: str,
+
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    resume_skills = extract_skills(text)
+
+    job_skills = extract_job_skills(
+        job_description
+    )
+
+    ats_result = calculate_ats_score(
+        resume_skills,
+        job_skills
+    )
+
+    suggestions = generate_resume_suggestions(
+        ats_result["missing_keywords"]
+    )
+
+    return {
+        "ats_score":
+            ats_result["ats_score"],
+
+        "matched_keywords":
+            ats_result["matched_keywords"],
+
+        "missing_keywords":
+            ats_result["missing_keywords"],
+
+        "suggestions":
+            suggestions
+    }
 
 
 

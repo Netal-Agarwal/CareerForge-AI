@@ -1090,10 +1090,6 @@ Resume
 
 → Career Report
 
-
-
-
-
 # Week 5 Day 1
 
 ## ATS Score Calculator
@@ -1109,9 +1105,7 @@ to compare resume skills with job description requirements.
 Generated:
 
 - ATS Score
-
 - Matched Keywords
-
 - Missing Keywords
 
 ## Keyword Matching Formula
@@ -1123,11 +1117,8 @@ ATS Score:
 ## Key Learnings
 
 - Resume-job comparison
-
 - Keyword extraction
-
 - ATS simulation
-
 - Matching algorithms
 
 ## CareerForge Evolution
@@ -1139,3 +1130,61 @@ Resume
 → Career Report
 
 → ATS Analysis
+
+
+
+
+
+# Week 5 Day 2
+
+## Resume Suggestion Engine
+
+Implemented:
+
+POST /resume-suggestions
+
+to generate resume improvement recommendations based on ATS analysis.
+
+## Analysis Workflow
+
+Resume
+
+→ Skill Extraction
+
+→ Job Description Parsing
+
+→ ATS Score
+
+→ Missing Keywords
+
+→ Resume Suggestions
+
+## Features
+
+Generated:
+
+- ATS Score
+
+- Matched Keywords
+
+- Missing Keywords
+
+- Resume Improvement Suggestions
+
+## Key Learnings
+
+- Recommendation engines
+
+- ATS optimization
+
+- Resume enhancement logic
+
+- Actionable feedback generation
+
+## CareerForge Evolution
+
+Resume
+
+→ ATS Analysis
+
+→ Improvement Suggestions

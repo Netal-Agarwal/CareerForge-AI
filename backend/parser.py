@@ -374,3 +374,41 @@ def extract_job_skills(
             found_skills.append(skill)
 
     return found_skills
+
+def generate_resume_suggestions(
+    missing_keywords
+):
+
+    suggestions = []
+
+    for skill in missing_keywords:
+
+        SKILL_SUGGESTIONS = {
+
+            "Python":
+                "Add Python projects and achievements",
+
+            "FastAPI":
+                "Mention APIs built using FastAPI",
+
+            "Docker":
+                "Include containerization projects",
+
+             "AWS":
+                "Highlight cloud deployment experience",
+
+            "Git":
+                "Show version control and collaboration experience"
+        }
+
+
+        suggestions.append(
+            SKILL_SUGGESTIONS.get(
+                skill,
+                f"Add evidence of {skill}"
+            )
+        )
+
+    return suggestions
+
+
