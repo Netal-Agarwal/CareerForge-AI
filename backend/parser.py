@@ -577,6 +577,45 @@ def generate_fit_summary(
     )
 
 
+def optimize_keywords(
+    resume_skills,
+    job_skills
+):
+
+    recommended_keywords = []
+
+    for skill in job_skills:
+
+        if skill not in resume_skills:
+            recommended_keywords.append(skill)
+
+    HIGH_PRIORITY = [
+        "Python",
+        "FastAPI",
+        "Docker",
+        "AWS",
+        "Git"
+    ]
+
+    priority_keywords = []
+
+    for skill in recommended_keywords:
+
+        if skill in HIGH_PRIORITY:
+            priority_keywords.append(skill)
+
+    return {
+        "recommended_keywords":
+            recommended_keywords,
+
+        "priority_keywords":
+            priority_keywords,
+
+        "keyword_count":
+            len(recommended_keywords)
+    }
+
+
 
 
 

@@ -32,7 +32,8 @@ from parser import (
     generate_resume_suggestions,
     generate_interview_questions,
     analyze_job_fit,
-    generate_fit_summary
+    generate_fit_summary,
+    optimize_keywords
 )
 
 from fastapi import Query
@@ -934,6 +935,47 @@ def job_fit_analysis(
 
 
     result["summary"] = summary
+
+    return result
+
+
+@app.post(
+    "/keyword-optimizer",
+    tags=["ATS Analysis"]
+)
+def keyword_optimizer(
+    job_description: str,
+
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    resume_skills = extract_skills(
+        text
+    )
+
+    job_skills = extract_job_skills(
+        job_description
+    )
+
+    result = optimize_keywords(
+        resume_skills,
+        job_skills
+    )
 
     return result
 

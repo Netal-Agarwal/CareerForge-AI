@@ -1222,10 +1222,6 @@ Resume
 
 → Interview Question Generation
 
-
-
-
-
 # Week 5 Day 4
 
 ## Job Fit Analysis Engine
@@ -1241,33 +1237,23 @@ to evaluate how well a resume matches a specific job description.
 Generated:
 
 - Fit Percentage
-
 - Matched Skills
-
 - Missing Skills
-
 - Fit Level
-
 - AI Summary
 
 ## Fit Levels
 
 - Excellent Match
-
 - Good Match
-
 - Moderate Match
-
 - Low Match
 
 ## Key Learnings
 
 - Resume-job compatibility analysis
-
 - Skill matching algorithms
-
 - Candidate evaluation systems
-
 - Explainable recommendations
 
 ## CareerForge Evolution
@@ -1281,3 +1267,63 @@ Resume
 → Interview Questions
 
 → Job Fit Analysis
+
+
+
+
+
+# Week 5 Day 5
+
+## Resume Keyword Optimizer
+
+Implemented:
+
+POST /keyword-optimizer
+
+to identify missing ATS keywords.
+
+## Features
+
+Generated:
+
+- Recommended Keywords
+
+- Priority Keywords
+
+- Keyword Count
+
+## Workflow
+
+Resume
+
+→ Skill Extraction
+
+→ Job Description Parsing
+
+→ Missing Keywords
+
+→ Keyword Optimization
+
+## Key Learnings
+
+- ATS keyword analysis
+
+- Resume optimization
+
+- Recommendation systems
+
+- Skill prioritization
+
+## CareerForge Evolution
+
+Resume
+
+→ ATS Analysis
+
+→ Resume Suggestions
+
+→ Interview Questions
+
+→ Job Fit Analysis
+
+→ Keyword Optimization
