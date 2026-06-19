@@ -1,5 +1,6 @@
 from PyPDF2 import PdfReader
 import re
+import random
 
 def extract_text_from_pdf(file_path):
 
@@ -410,5 +411,115 @@ def generate_resume_suggestions(
         )
 
     return suggestions
+
+INTERVIEW_QUESTIONS = {
+
+    "Python": [
+        "What are Python decorators?",
+        "Explain list comprehensions.",
+        "What is the difference between a list and tuple?",
+        "What are generators in Python?",
+        "Explain *args and **kwargs.",
+        "How does memory management work in Python?"
+    ],
+
+    "FastAPI": [
+        "What are dependency injections in FastAPI?",
+        "Explain Pydantic models.",
+        "How does FastAPI improve performance?",
+        "What is middleware in FastAPI?",
+        "Difference between FastAPI and Flask?",
+        "How does FastAPI handle asynchronous operations?"
+    ],
+
+    "PostgreSQL": [
+        "What is normalization?",
+        "Difference between DELETE and TRUNCATE?",
+        "Explain indexing.",
+        "What are joins in PostgreSQL?",
+        "What is a primary key and foreign key?",
+        "How does PostgreSQL ensure ACID compliance?"
+    ],
+
+    "AWS": [
+        "What is EC2?",
+        "Difference between EC2 and Lambda?",
+        "What is an S3 bucket?",
+        "What is IAM in AWS?",
+        "Explain VPC in AWS.",
+        "Difference between S3 and EBS?"
+    ],
+
+    "MongoDB": [
+        "What is a document database?",
+        "Difference between MongoDB and SQL?",
+        "What are collections?",
+        "What is aggregation in MongoDB?",
+        "What are indexes in MongoDB?",
+        "Explain sharding in MongoDB."
+    ],
+
+    "Docker": [
+        "What is Docker?",
+        "Difference between Docker image and container?",
+        "What is Docker Compose?",
+        "What are Docker volumes?",
+        "How does containerization work?",
+        "Difference between Docker and Virtual Machines?"
+    ],
+
+    "Git": [
+        "What is Git rebase?",
+        "Difference between merge and rebase?",
+        "Explain pull requests.",
+        "What is a detached HEAD state?",
+        "Explain Git branching strategy.",
+        "How do you resolve merge conflicts?"
+    ],
+
+    "React": [
+        "What are React Hooks?",
+        "Explain useState and useEffect.",
+        "What is Virtual DOM?",
+        "Difference between props and state?",
+        "What is React Context API?",
+        "How does React rendering work?"
+    ],
+
+    "Node.js": [
+        "What is Node.js?",
+        "Explain the event loop.",
+        "Difference between Node.js and Express.js?",
+        "What are streams in Node.js?",
+        "What is middleware?",
+        "How does asynchronous programming work in Node.js?"
+    ]
+}
+
+
+def generate_interview_questions(
+    skills
+):
+
+    questions = {}
+
+    for skill in skills:
+
+        if skill in INTERVIEW_QUESTIONS:
+
+            questions[skill] = random.sample(
+                INTERVIEW_QUESTIONS[skill],
+                min(
+                    4,
+                    len(INTERVIEW_QUESTIONS[skill])
+                )
+            )
+
+    return questions
+
+
+
+
+
 
 

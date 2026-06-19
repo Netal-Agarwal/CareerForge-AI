@@ -1131,10 +1131,6 @@ Resume
 
 → ATS Analysis
 
-
-
-
-
 # Week 5 Day 2
 
 ## Resume Suggestion Engine
@@ -1164,21 +1160,15 @@ Resume
 Generated:
 
 - ATS Score
-
 - Matched Keywords
-
 - Missing Keywords
-
 - Resume Improvement Suggestions
 
 ## Key Learnings
 
 - Recommendation engines
-
 - ATS optimization
-
 - Resume enhancement logic
-
 - Actionable feedback generation
 
 ## CareerForge Evolution
@@ -1188,3 +1178,55 @@ Resume
 → ATS Analysis
 
 → Improvement Suggestions
+
+
+
+
+
+# Week 5 Day 3
+
+## Interview Question Generator
+
+Implemented:
+
+GET /interview-questions
+
+to generate interview questions based on extracted resume skills.
+
+## Features
+
+Generated:
+
+- Skill-specific interview questions
+
+- Technical preparation guidance
+
+- Dynamic question sets
+
+## Workflow
+
+Resume
+
+→ Skill Extraction
+
+→ Question Generation
+
+## Key Learnings
+
+- Rule-based content generation
+
+- Interview preparation systems
+
+- Dynamic API responses
+
+- Mapping skills to knowledge areas
+
+## CareerForge Evolution
+
+Resume
+
+→ ATS Analysis
+
+→ Resume Suggestions
+
+→ Interview Question Generation
