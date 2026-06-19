@@ -34,7 +34,8 @@ from parser import (
     analyze_job_fit,
     generate_fit_summary,
     optimize_keywords,
-    generate_learning_recommendations
+    generate_learning_recommendations,
+    generate_career_coach_summary
 )
 
 from fastapi import Query
@@ -1032,6 +1033,110 @@ def learning_recommendations(
         "learning_plan":
             recommendations
     }
+
+
+@app.get(
+    "/ai-career-coach",
+    tags=["AI Career Coach"]
+)
+def ai_career_coach(
+    career_track: str,
+
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    skills = extract_skills(text)
+
+    missing_skills = find_missing_skills(
+        skills,
+        career_track
+    )
+
+    roadmap = (
+        generate_learning_recommendations(
+            missing_skills
+        )
+    )
+
+    score = calculate_resume_score(
+        skills,
+        career_track
+    )
+
+    grade = get_grade(score)
+
+    feedback = generate_feedback(
+        skills,
+        career_track
+    )
+
+    questions = (
+        generate_interview_questions(
+            skills
+        )
+    )
+
+    ats_score = round(
+        (len(skills) /
+         (len(skills) +
+          len(missing_skills))) * 100
+    )
+
+    summary = (
+        generate_career_coach_summary(
+            feedback["strengths"],
+            missing_skills,
+            ats_score
+        )
+    )
+
+    return {
+
+        "career_track":
+            career_track,
+
+        "resume_score":
+            score,
+
+        "grade":
+            grade,
+
+        "ats_score":
+            ats_score,
+
+        "strengths":
+            feedback["strengths"],
+
+        "missing_skills":
+            missing_skills,
+
+        "interview_questions":
+            questions,
+
+        "learning_plan":
+            roadmap,
+
+        "summary":
+            summary
+    }
+
+
+
 
 
 

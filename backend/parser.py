@@ -685,6 +685,24 @@ def generate_learning_recommendations(
     return recommendations
 
 
+def generate_career_coach_summary(
+    strengths,
+    missing_skills,
+    ats_score
+):
+
+    return (
+        f"You are strong in "
+        f"{', '.join(strengths[:3])}. "
+        f"Your ATS score is {ats_score}. "
+        f"Focus on "
+        f"{', '.join(missing_skills[:3])} "
+        f"to improve job readiness."
+    )
+
+
+
+
 
 
 
