@@ -1015,6 +1015,91 @@ def prioritize_skill_gaps(
 
     return prioritized
 
+PROJECT_RECOMMENDATIONS = {
+
+    "Python":
+        "Build a Python Automation Tool",
+
+    "FastAPI":
+        "Build a REST API",
+
+    "Docker":
+        "Containerize an application",
+
+    "AWS":
+        "Deploy a cloud project",
+
+    "PostgreSQL":
+        "Design a database-backed system",
+
+    "MongoDB":
+        "Build a NoSQL-based application",
+
+    "React":
+        "Build a frontend dashboard",
+
+    "Node.js":
+        "Build a backend service",
+
+    "Git":
+        "Contribute to an open-source project"
+}
+
+
+def generate_career_roadmap(
+    priority_skills
+):
+
+    roadmap = {
+
+        "30_days": [],
+
+        "60_days": [],
+
+        "90_days": []
+    }
+
+    if len(priority_skills) >= 1:
+
+        roadmap["30_days"].append(
+            f"Learn {priority_skills[0]['skill']}"
+        )
+
+        roadmap["30_days"].append(
+            PROJECT_RECOMMENDATIONS.get(
+                priority_skills[0]["skill"],
+                f"Build a project using {priority_skills[0]['skill']}"
+            )
+        )
+
+    if len(priority_skills) >= 2:
+
+        roadmap["60_days"].append(
+            f"Learn {priority_skills[1]['skill']}"
+        )
+
+        roadmap["60_days"].append(
+            PROJECT_RECOMMENDATIONS.get(
+                priority_skills[1]["skill"],
+                f"Build a project using {priority_skills[1]['skill']}"
+            )
+        )
+
+    if len(priority_skills) >= 3:
+
+        roadmap["90_days"].append(
+            f"Learn {priority_skills[2]['skill']}"
+        )
+
+        roadmap["90_days"].append(
+            PROJECT_RECOMMENDATIONS.get(
+                priority_skills[2]["skill"],
+                f"Build a project using {priority_skills[2]['skill']}"
+            )
+        )
+
+    return roadmap
+
 
 
 

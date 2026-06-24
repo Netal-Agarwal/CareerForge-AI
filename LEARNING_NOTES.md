@@ -1562,10 +1562,6 @@ to estimate overall readiness for a target career path.
 - Career readiness assessment
 - Recommendation logic
 
-
-
-
-
 # Week 6 Day 5
 
 ## Skill Gap Priority Analyzer
@@ -1581,11 +1577,8 @@ to rank missing skills by career impact.
 Generated:
 
 - Missing Skills
-
 - Impact Scores
-
 - Learning Priorities
-
 - Next Skill Recommendation
 
 ## Analysis Method
@@ -1595,9 +1588,59 @@ Used weighted skill importance values to determine which skills contribute most 
 ## Key Learnings
 
 - Prioritization systems
-
 - Weighted recommendation engines
-
 - Career coaching logic
-
 - Skill impact analysis
+
+
+
+# Week 6 Day 6
+
+## Personalized Career Roadmap Generator
+
+Implemented:
+
+GET /career-roadmap
+
+to create a 30/60/90-day improvement plan.
+
+## Features
+
+Generated:
+
+- Next Skill To Learn
+
+- 30 Day Goals
+
+- 60 Day Goals
+
+- 90 Day Goals
+
+## Roadmap Logic
+
+Used:
+
+- Skill Gaps
+
+- Impact Scores
+
+- Learning Priorities
+
+to generate personalized plans.
+
+## Key Learnings
+
+- Roadmap generation
+
+- Personalized planning
+
+- Career coaching systems
+
+- Recommendation workflows
+
+
+
+
+
+
+
