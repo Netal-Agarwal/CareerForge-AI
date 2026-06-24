@@ -1101,6 +1101,23 @@ def generate_career_roadmap(
     return roadmap
 
 
+def generate_executive_summary(
+    readiness_score,
+    next_skill,
+    ats_score
+):
+
+    return (
+        f"Your career readiness score is "
+        f"{readiness_score}/100. "
+        f"Your ATS score is {ats_score}/100. "
+        f"Focus on {next_skill} next to maximize your improvement."
+    )
+
+
+
+
+
 
 
 

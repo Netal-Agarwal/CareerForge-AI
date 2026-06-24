@@ -43,7 +43,8 @@ from parser import (
     calculate_career_readiness,
     get_readiness_advice,
     prioritize_skill_gaps,
-    generate_career_roadmap
+    generate_career_roadmap,
+    generate_executive_summary
 )
 
 from fastapi import Query
@@ -1525,6 +1526,153 @@ def career_roadmap(
         "roadmap":
             roadmap
     }
+
+
+@app.get(
+    "/executive-dashboard",
+    tags=["Executive Dashboard"]
+)
+def executive_dashboard(
+
+    career_track: str,
+
+    current_user: User = Depends(
+        get_current_user
+    ),
+
+    db: Session = Depends(
+        get_db
+    )
+):
+
+    resume = db.query(
+        Resume
+    ).filter(
+        Resume.user_id ==
+        current_user.id
+    ).first()
+
+    if not resume:
+
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    skills = extract_skills(
+        text
+    )
+
+    missing_skills = (
+        find_missing_skills(
+            skills,
+            career_track
+        )
+    )
+
+    priorities = (
+        prioritize_skill_gaps(
+            missing_skills
+        )
+    )
+
+    roadmap = (
+        generate_career_roadmap(
+            priorities
+        )
+    )
+
+    resume_score = (
+        calculate_resume_score(
+            skills,
+            career_track
+        )
+    )
+
+    proficiency = (
+        analyze_skill_proficiency(
+            text,
+            skills
+        )
+    )
+
+    proficiency_bonus = (
+        calculate_proficiency_bonus(
+            proficiency
+        )
+    )
+
+    ats_score = round(
+        (
+            len(skills)
+            /
+            (
+                len(skills)
+                +
+                len(missing_skills)
+            )
+        ) * 100
+    )
+
+    readiness_score = (
+        calculate_career_readiness(
+            resume_score,
+            ats_score,
+            proficiency_bonus
+        )
+    )
+
+    questions = (
+        generate_interview_questions(
+            skills
+        )
+    )
+
+    summary = (
+        generate_executive_summary(
+            readiness_score,
+            priorities[0]["skill"]
+            if priorities else "None",
+            ats_score
+        )
+    )
+
+    return {
+
+        "career_track":
+            career_track,
+
+        "career_readiness_score":
+            readiness_score,
+
+        "ats_score":
+            ats_score,
+
+        "resume_score":
+            resume_score,
+
+        "next_skill_to_learn":
+            priorities[0]["skill"]
+            if priorities else None,
+
+        "priority_skills":
+            priorities,
+
+        "career_roadmap":
+            roadmap,
+
+        "interview_questions":
+            questions,
+
+        "executive_summary":
+            summary
+    }
+
+
 
 
 
