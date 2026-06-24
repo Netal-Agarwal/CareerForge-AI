@@ -1492,10 +1492,6 @@ Generated:
 - Candidate evaluation
 - Skill prioritization
 
-
-
-
-
 # Week 6 Day 3
 
 ## Skill Proficiency Analyzer
@@ -1509,9 +1505,7 @@ to estimate proficiency levels for extracted skills.
 ## Proficiency Levels
 
 - Beginner
-
 - Intermediate
-
 - Advanced
 
 ## Analysis Method
@@ -1523,16 +1517,68 @@ Examined action verbs and project descriptions in the resume to estimate skill s
 Generated:
 
 - Skill List
-
 - Estimated Proficiency Level
 
 ## Key Learnings
 
 - Resume semantics
-
 - Keyword-based NLP
-
 - Skill assessment
-
 - Candidate profiling
+
+
+
+
+
+# Week 6 Day 4
+
+## Career Readiness Score Engine
+
+Implemented:
+
+GET /career-readiness
+
+to estimate overall readiness for a target career path.
+
+## Inputs
+
+- Resume Score
+
+- ATS Score
+
+- Skill Proficiency
+
+## Outputs
+
+- Career Readiness Score
+
+- Readiness Level
+
+- Improvement Advice
+
+## Levels
+
+- Job Ready
+
+- Moderately Ready
+
+- Developing
+
+- Beginner Stage
+
+## Key Learnings
+
+- Composite scoring systems
+
+- Candidate evaluation
+
+- Career readiness assessment
+
+- Recommendation logic
+
+
+
+
+
+
 

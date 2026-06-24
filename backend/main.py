@@ -37,7 +37,11 @@ from parser import (
     generate_learning_recommendations,
     generate_career_coach_summary,
     calculate_weighted_ats_score,
-    analyze_skill_proficiency
+    analyze_skill_proficiency,
+    get_readiness_level,
+    calculate_proficiency_bonus,
+    calculate_career_readiness,
+    get_readiness_advice
 )
 
 from fastapi import Query
@@ -1268,6 +1272,128 @@ def skill_proficiency(
     return {
         "skills": proficiency
     }
+
+
+@app.get(
+    "/career-readiness",
+    tags=["Career Analysis"]
+)
+def career_readiness(
+
+    career_track: str,
+
+    current_user: User = Depends(
+        get_current_user
+    ),
+
+    db: Session = Depends(
+        get_db
+    )
+):
+
+    resume = db.query(
+        Resume
+    ).filter(
+        Resume.user_id ==
+        current_user.id
+    ).first()
+
+    if not resume:
+
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    skills = extract_skills(
+        text
+    )
+
+    resume_score = (
+        calculate_resume_score(
+            skills,
+            career_track
+        )
+    )
+
+    proficiency = (
+        analyze_skill_proficiency(
+            text,
+            skills
+        )
+    )
+
+    proficiency_bonus = (
+        calculate_proficiency_bonus(
+            proficiency
+        )
+    )
+
+    ats_score = round(
+        (
+            len(skills)
+            /
+            (
+                len(skills)
+                +
+                len(
+                    find_missing_skills(
+                        skills,
+                        career_track
+                    )
+                )
+            )
+        ) * 100
+    )
+
+    readiness_score = (
+        calculate_career_readiness(
+            resume_score,
+            ats_score,
+            proficiency_bonus
+        )
+    )
+
+
+    return {
+
+    "career_track":
+        career_track,
+
+    "career_readiness_score":
+        readiness_score,
+
+    "readiness_level":
+        get_readiness_level(
+            readiness_score
+        ),
+
+    "advice":
+        get_readiness_advice(
+            readiness_score
+        ),
+
+    "resume_score":
+        resume_score,
+
+    "ats_score":
+        ats_score,
+
+    "proficiency_bonus":
+        proficiency_bonus
+    }
+
+
+
+
+
+
+
+
 
 
 

@@ -915,6 +915,79 @@ def analyze_skill_proficiency(
     return proficiency
 
 
+def get_readiness_level(score):
+
+    if score >= 80:
+        return "Job Ready"
+
+    elif score >= 60:
+        return "Moderately Ready"
+
+    elif score >= 40:
+        return "Developing"
+
+    return "Beginner Stage"
+
+
+def calculate_proficiency_bonus(
+    proficiency_data
+):
+
+    bonus = 0
+
+    for level in proficiency_data.values():
+
+        if level == "Advanced":
+            bonus += 3
+
+        elif level == "Intermediate":
+            bonus += 2
+
+        elif level == "Beginner":
+            bonus += 1
+
+    return bonus
+
+
+def calculate_career_readiness(
+    resume_score,
+    ats_score,
+    proficiency_bonus
+):
+
+    readiness_score = (
+        (resume_score * 0.4)
+        +
+        (ats_score * 0.4)
+        +
+        (proficiency_bonus * 2)
+    )
+
+    readiness_score = round(
+        min(
+            readiness_score,
+            100
+        )
+    )
+
+    return readiness_score
+
+def get_readiness_advice(
+    score
+):
+
+    if score >= 80:
+        return "You are ready to apply confidently."
+
+    elif score >= 60:
+        return "Focus on strengthening missing skills."
+
+    elif score >= 40:
+        return "Build more projects and improve core skills."
+
+    return "Focus on learning fundamentals before applying."
+
+
 
 
 
