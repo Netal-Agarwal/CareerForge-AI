@@ -988,6 +988,34 @@ def get_readiness_advice(
     return "Focus on learning fundamentals before applying."
 
 
+def prioritize_skill_gaps(
+    missing_skills
+):
+
+    prioritized = []
+
+    for skill in missing_skills:
+
+        prioritized.append({
+
+            "skill": skill,
+
+            "impact_score":
+                SKILL_WEIGHTS.get(
+                    skill,
+                    1
+                )
+        })
+
+    prioritized.sort(
+        key=lambda x:
+        x["impact_score"],
+        reverse=True
+    )
+
+    return prioritized
+
+
 
 
 

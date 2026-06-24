@@ -41,7 +41,8 @@ from parser import (
     get_readiness_level,
     calculate_proficiency_bonus,
     calculate_career_readiness,
-    get_readiness_advice
+    get_readiness_advice,
+    prioritize_skill_gaps
 )
 
 from fastapi import Query
@@ -1386,6 +1387,75 @@ def career_readiness(
     "proficiency_bonus":
         proficiency_bonus
     }
+
+@app.get(
+    "/skill-gap-priority",
+    tags=["Career Analysis"]
+)
+def skill_gap_priority(
+
+    career_track: str,
+
+    current_user: User = Depends(
+        get_current_user
+    ),
+
+    db: Session = Depends(
+        get_db
+    )
+):
+
+    resume = db.query(
+        Resume
+    ).filter(
+        Resume.user_id ==
+        current_user.id
+    ).first()
+
+    if not resume:
+
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    skills = extract_skills(
+        text
+    )
+
+    missing_skills = (
+        find_missing_skills(
+            skills,
+            career_track
+        )
+    )
+
+    priorities = (
+        prioritize_skill_gaps(
+            missing_skills
+        )
+    )
+
+    return {
+
+    "career_track":
+        career_track,
+
+    "next_skill_to_learn":
+        priorities[0]["skill"]
+        if priorities else None,
+
+    "priority_skills":
+        priorities
+    }
+
+
+
+
 
 
 

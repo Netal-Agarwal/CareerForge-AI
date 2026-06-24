@@ -1526,10 +1526,6 @@ Generated:
 - Skill assessment
 - Candidate profiling
 
-
-
-
-
 # Week 6 Day 4
 
 ## Career Readiness Score Engine
@@ -1543,42 +1539,65 @@ to estimate overall readiness for a target career path.
 ## Inputs
 
 - Resume Score
-
 - ATS Score
-
 - Skill Proficiency
 
 ## Outputs
 
 - Career Readiness Score
-
 - Readiness Level
-
 - Improvement Advice
 
 ## Levels
 
 - Job Ready
-
 - Moderately Ready
-
 - Developing
-
 - Beginner Stage
 
 ## Key Learnings
 
 - Composite scoring systems
-
 - Candidate evaluation
-
 - Career readiness assessment
-
 - Recommendation logic
 
 
 
 
 
+# Week 6 Day 5
 
+## Skill Gap Priority Analyzer
 
+Implemented:
+
+GET /skill-gap-priority
+
+to rank missing skills by career impact.
+
+## Features
+
+Generated:
+
+- Missing Skills
+
+- Impact Scores
+
+- Learning Priorities
+
+- Next Skill Recommendation
+
+## Analysis Method
+
+Used weighted skill importance values to determine which skills contribute most to career readiness.
+
+## Key Learnings
+
+- Prioritization systems
+
+- Weighted recommendation engines
+
+- Career coaching logic
+
+- Skill impact analysis
