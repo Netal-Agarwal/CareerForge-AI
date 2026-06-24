@@ -1430,10 +1430,6 @@ Resume Upload
 
 → AI Career Coach
 
-
-
-
-
 # Week 6 Day 1
 
 ## Smart Skill Extraction Engine
@@ -1445,27 +1441,66 @@ Enhanced resume parsing using skill aliases.
 Recognized:
 
 - AWS → Amazon Web Services
-
 - PostgreSQL → Postgres
-
 - Python → Python3
-
 - FastAPI → FastAPI Framework
 
 ## Features
 
 - Alias matching
-
 - Improved parsing accuracy
-
 - Better resume understanding
 
 ## Key Learnings
 
 - NLP preprocessing
-
 - Alias mapping
-
 - Information extraction
-
 - Resume intelligence
+
+
+
+
+
+# Week 6 Day 2
+
+## Weighted ATS Scoring Engine
+
+Implemented:
+
+POST /weighted-ats-score
+
+to provide realistic ATS scoring.
+
+## Improvements
+
+Introduced:
+
+- Skill Weights
+
+- Weighted Matching
+
+- Weighted ATS Score
+
+## Features
+
+Generated:
+
+- ATS Score
+
+- Matched Weight
+
+- Total Weight
+
+- Missing Keywords
+
+## Key Learnings
+
+- Weighted scoring systems
+
+- ATS ranking logic
+
+- Candidate evaluation
+
+- Skill prioritization
+

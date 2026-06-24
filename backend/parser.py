@@ -753,6 +753,102 @@ def generate_career_coach_summary(
     )
 
 
+SKILL_WEIGHTS = {
+
+    "Python": 5,
+
+    "FastAPI": 4,
+
+    "PostgreSQL": 4,
+
+    "Docker": 4,
+
+    "AWS": 4,
+
+    "Redis": 3,
+
+    "Git": 2,
+
+    "CI/CD": 3,
+
+    "MongoDB": 3,
+
+    "React": 3,
+
+    "Node.js": 3
+}
+
+
+def calculate_weighted_ats_score(
+    resume_skills,
+    job_skills
+):
+
+    total_weight = 0
+
+    matched_weight = 0
+
+    matched_keywords = []
+
+    missing_keywords = []
+
+    for skill in job_skills:
+
+        weight = SKILL_WEIGHTS.get(
+            skill,
+            1
+        )
+
+        total_weight += weight
+
+        if skill in resume_skills:
+
+            matched_weight += weight
+
+            matched_keywords.append(
+                skill
+            )
+
+        else:
+
+            missing_keywords.append(
+                skill
+            )
+
+    if total_weight == 0:
+
+        score = 0
+
+    else:
+
+        score = round(
+            (
+                matched_weight /
+                total_weight
+            ) * 100
+        )
+
+    return {
+
+        "ats_score": score,
+
+        "matched_keywords":
+            matched_keywords,
+
+        "missing_keywords":
+            missing_keywords,
+
+        "matched_weight":
+            matched_weight,
+
+        "total_weight":
+            total_weight
+    }
+
+
+
+
+
 
 
 

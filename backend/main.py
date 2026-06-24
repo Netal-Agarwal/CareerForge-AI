@@ -35,7 +35,8 @@ from parser import (
     generate_fit_summary,
     optimize_keywords,
     generate_learning_recommendations,
-    generate_career_coach_summary
+    generate_career_coach_summary,
+    calculate_weighted_ats_score
 )
 
 from fastapi import Query
@@ -1164,6 +1165,62 @@ def debug_skills(
     return {
         "skills": skills
     }
+
+
+@app.post(
+    "/weighted-ats-score",
+    tags=["ATS Analysis"]
+)
+def weighted_ats_score(
+
+    job_description: str,
+
+    current_user: User = Depends(
+        get_current_user
+    ),
+
+    db: Session = Depends(
+        get_db
+    )
+):
+
+    resume = db.query(
+        Resume
+    ).filter(
+        Resume.user_id ==
+        current_user.id
+    ).first()
+
+    if not resume:
+
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    resume_skills = extract_skills(
+        text
+    )
+
+    job_skills = extract_job_skills(
+        job_description
+    )
+
+    result = (
+        calculate_weighted_ats_score(
+            resume_skills,
+            job_skills
+        )
+    )
+
+    return result
+
+
+
 
 
 
