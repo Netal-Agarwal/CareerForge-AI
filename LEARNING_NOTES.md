@@ -1458,10 +1458,6 @@ Recognized:
 - Information extraction
 - Resume intelligence
 
-
-
-
-
 # Week 6 Day 2
 
 ## Weighted ATS Scoring Engine
@@ -1477,9 +1473,7 @@ to provide realistic ATS scoring.
 Introduced:
 
 - Skill Weights
-
 - Weighted Matching
-
 - Weighted ATS Score
 
 ## Features
@@ -1487,20 +1481,58 @@ Introduced:
 Generated:
 
 - ATS Score
-
 - Matched Weight
-
 - Total Weight
-
 - Missing Keywords
 
 ## Key Learnings
 
 - Weighted scoring systems
-
 - ATS ranking logic
-
 - Candidate evaluation
-
 - Skill prioritization
+
+
+
+
+
+# Week 6 Day 3
+
+## Skill Proficiency Analyzer
+
+Implemented:
+
+GET /skill-proficiency
+
+to estimate proficiency levels for extracted skills.
+
+## Proficiency Levels
+
+- Beginner
+
+- Intermediate
+
+- Advanced
+
+## Analysis Method
+
+Examined action verbs and project descriptions in the resume to estimate skill strength.
+
+## Features
+
+Generated:
+
+- Skill List
+
+- Estimated Proficiency Level
+
+## Key Learnings
+
+- Resume semantics
+
+- Keyword-based NLP
+
+- Skill assessment
+
+- Candidate profiling
 

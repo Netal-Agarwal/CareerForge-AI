@@ -846,6 +846,78 @@ def calculate_weighted_ats_score(
     }
 
 
+PROFICIENCY_KEYWORDS = {
+
+    "Advanced": [
+        "developed",
+        "designed",
+        "implemented",
+        "architected",
+        "optimized",
+        "led",
+        "deployed"
+    ],
+
+    "Intermediate": [
+        "built",
+        "created",
+        "worked",
+        "integrated",
+        "configured",
+        "maintained"
+    ],
+
+    "Beginner": [
+        "learned",
+        "studied",
+        "familiar",
+        "basic",
+        "beginner"
+    ]
+}
+
+
+def analyze_skill_proficiency(
+    text,
+    skills
+):
+
+    text = text.lower()
+
+    proficiency = {}
+
+    advanced_count = len([
+        word
+        for word in PROFICIENCY_KEYWORDS["Advanced"]
+        if word in text
+    ])
+
+    intermediate_count = len([
+        word
+        for word in PROFICIENCY_KEYWORDS["Intermediate"]
+        if word in text
+    ])
+
+    for skill in skills:
+
+        if advanced_count >= 3:
+
+            proficiency[skill] = "Advanced"
+
+        elif intermediate_count >= 2:
+
+            proficiency[skill] = "Intermediate"
+
+        else:
+
+            proficiency[skill] = "Beginner"
+
+    return proficiency
+
+
+
+
+
 
 
 

@@ -36,7 +36,8 @@ from parser import (
     optimize_keywords,
     generate_learning_recommendations,
     generate_career_coach_summary,
-    calculate_weighted_ats_score
+    calculate_weighted_ats_score,
+    analyze_skill_proficiency
 )
 
 from fastapi import Query
@@ -1219,6 +1220,54 @@ def weighted_ats_score(
 
     return result
 
+
+@app.get(
+    "/skill-proficiency",
+    tags=["Skill Analysis"]
+)
+def skill_proficiency(
+
+    current_user: User = Depends(
+        get_current_user
+    ),
+
+    db: Session = Depends(
+        get_db
+    )
+):
+
+    resume = db.query(
+        Resume
+    ).filter(
+        Resume.user_id ==
+        current_user.id
+    ).first()
+
+    if not resume:
+
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    skills = extract_skills(
+        text
+    )
+
+    proficiency = (
+        analyze_skill_proficiency(
+            text,
+            skills
+        )
+    )
+
+    return {
+        "skills": proficiency
+    }
 
 
 
