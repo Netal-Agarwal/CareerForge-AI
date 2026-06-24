@@ -1136,6 +1136,39 @@ def ai_career_coach(
     }
 
 
+@app.get(
+    "/debug-skills",
+    tags=["Testing"]
+)
+def debug_skills(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    resume = db.query(Resume).filter(
+        Resume.user_id == current_user.id
+    ).first()
+
+    if not resume:
+        raise HTTPException(
+            status_code=404,
+            detail="Resume not found"
+        )
+
+    text = extract_text_from_pdf(
+        resume.file_path
+    )
+
+    skills = extract_skills(text)
+
+    return {
+        "skills": skills
+    }
+
+
+
+
+
 
 
 

@@ -25,29 +25,81 @@ def extract_email(text):
 
     return None
 
-SKILLS_DB = [
-    "Python",
-    "Java",
-    "C++",
-    "FastAPI",
-    "PostgreSQL",
-    "SQL",
-    "AWS",
-    "React",
-    "Node.js",
-    "MongoDB"
-]
+SKILL_ALIASES = {
+
+    "Python": [
+        "python",
+        "python3",
+        "python programming"
+    ],
+
+    "FastAPI": [
+        "fastapi",
+        "fastapi framework"
+    ],
+
+    "PostgreSQL": [
+        "postgresql",
+        "postgres"
+    ],
+
+    "AWS": [
+        "aws",
+        "amazon web services"
+    ],
+
+    "MongoDB": [
+        "mongodb",
+        "mongo db"
+    ],
+
+    "Docker": [
+        "docker",
+        "containerization"
+    ],
+
+    "Git": [
+        "git",
+        "github",
+        "version control"
+    ],
+
+    "Redis": [
+        "redis"
+    ],
+
+    "React": [
+        "react",
+        "reactjs",
+        "react.js"
+    ],
+
+    "Node.js": [
+        "nodejs",
+        "node.js"
+    ]
+}
+
 
 def extract_skills(text):
 
-    found_skills = []
+    text = text.lower()
 
-    for skill in SKILLS_DB:
+    extracted_skills = []
 
-        if skill.lower() in text.lower():
-            found_skills.append(skill)
+    for skill, aliases in SKILL_ALIASES.items():
 
-    return found_skills
+        for alias in aliases:
+
+            if alias in text:
+
+                extracted_skills.append(skill)
+
+                break
+
+    return extracted_skills
+
+
 
 CAREER_TRACKS = {
 

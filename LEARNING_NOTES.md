@@ -1371,10 +1371,6 @@ Resume
 
 → Learning Recommendations
 
-
-
-
-
 # Week 5 Day 7
 
 ## AI Career Coach Dashboard
@@ -1390,17 +1386,11 @@ to combine all CareerForge intelligence into a single API.
 Generated:
 
 - Resume Score
-
 - ATS Score
-
 - Strengths
-
 - Missing Skills
-
 - Interview Questions
-
 - Learning Recommendations
-
 - AI Summary
 
 ## Workflow
@@ -1420,11 +1410,8 @@ Resume
 ## Key Learnings
 
 - API aggregation
-
 - Dashboard architecture
-
 - Recommendation systems
-
 - Career intelligence workflows
 
 ## CareerForge Evolution
@@ -1442,3 +1429,43 @@ Resume Upload
 → Learning Recommendations
 
 → AI Career Coach
+
+
+
+
+
+# Week 6 Day 1
+
+## Smart Skill Extraction Engine
+
+Enhanced resume parsing using skill aliases.
+
+## Improvements
+
+Recognized:
+
+- AWS → Amazon Web Services
+
+- PostgreSQL → Postgres
+
+- Python → Python3
+
+- FastAPI → FastAPI Framework
+
+## Features
+
+- Alias matching
+
+- Improved parsing accuracy
+
+- Better resume understanding
+
+## Key Learnings
+
+- NLP preprocessing
+
+- Alias mapping
+
+- Information extraction
+
+- Resume intelligence
