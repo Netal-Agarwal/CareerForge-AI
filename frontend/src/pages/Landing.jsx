@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import FeatureCard from "../components/FeatureCard";
+import DashboardPreview from "../components/DashboardPreview";
 
 import {
     FaRobot,
@@ -17,7 +18,7 @@ function Landing() {
 
       {/* Hero */}
 
-      <section className="max-w-7xl mx-auto px-10 py-24">
+      <section className="max-w-7xl mx-auto px-10 py-32">
 
         <div className="text-center">
 
@@ -143,6 +144,35 @@ function Landing() {
             title="Interview Preparation"
             description="Practice interview questions based on your skills."
           />
+
+        </div>
+
+      </section>
+
+      <section className="max-w-6xl mx-auto px-8 pb-24">
+        <DashboardPreview />
+      </section>
+
+
+      <section className="max-w-6xl mx-auto py-24">
+
+        <div className="bg-gradient-to-r from-purple-700 to-purple-500 rounded-3xl p-16 text-center">
+
+          <h2 className="text-5xl font-bold">
+            Ready to Forge Your Future?
+          </h2>
+
+          <p className="mt-6 text-lg text-purple-100">
+
+            Upload your resume and receive AI-powered career insights in seconds.
+
+          </p>
+
+          <button className="mt-10 bg-white text-purple-700 px-10 py-4 rounded-xl font-semibold hover:bg-gray-200 transition">
+
+            Start Free Analysis
+
+          </button>
 
         </div>
 

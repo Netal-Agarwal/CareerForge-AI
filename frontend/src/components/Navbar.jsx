@@ -4,7 +4,7 @@ function Navbar() {
 
   return (
 
-    <nav className="flex justify-between items-center px-12 py-6">
+    <nav className="sticky top-0 z-50 backdrop-blur-md bg-slate-950/70 border-b border-slate-800 flex justify-between items-center px-12 py-6">
 
       <Link
         to="/"
