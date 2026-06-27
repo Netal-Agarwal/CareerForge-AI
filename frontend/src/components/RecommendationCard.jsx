@@ -1,4 +1,10 @@
-function RecommendationCard(){
+function RecommendationCard( {report} ){
+
+    if (!report) {
+
+        return null;
+    
+    }
 
     return(
 
@@ -12,21 +18,30 @@ function RecommendationCard(){
 
             <div className="mt-8">
 
-                <div className="bg-slate-900 rounded-xl p-5">
+            {
+                report?.strengths?.map((skill) => (
 
-                    <h3 className="text-purple-400">
+                    <div
+                        key={skill}
+                        className="bg-slate-900 rounded-xl p-4 mt-3"
+                    >
 
-                        Recommended Skill
+                        <h3 className="text-purple-400">
 
-                    </h3>
+                            Strength
 
-                    <p className="mt-3">
+                        </h3>
 
-                        Learn Docker to improve Backend readiness.
+                        <p className="mt-2">
 
-                    </p>
+                            {skill}
 
-                </div>
+                        </p>
+
+                    </div>
+
+                ))
+            }
 
                 <div className="bg-slate-900 rounded-xl p-5 mt-5">
 

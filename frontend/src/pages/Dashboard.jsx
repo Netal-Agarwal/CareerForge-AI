@@ -7,7 +7,9 @@ import RecommendationCard from "../components/RecommendationCard";
 import TargetRoles from "../components/TargetRoles";
 import RecentActivity from "../components/RecentActivity";
 
-import { getCareerReport } from "../services/dashboardServices";
+import { getCareerReport,
+  getCareerReadiness,
+ } from "../services/dashboardServices";
 
 
 
@@ -17,17 +19,36 @@ function Dashboard(){
 
     const [loading, setLoading] = useState(true);
 
+    const [careerReadiness, setCareerReadiness] = useState(null);
+
+
     useEffect(() => {
 
       async function loadDashboard() {
   
           try {
   
-              const data = await getCareerReport(
-                  "backend_developer"
-              );
-  
-              setReport(data);
+            const reportData = await getCareerReport(
+              "backend_developer"
+            );
+          
+            const readinessData = await getCareerReadiness("backend_developer");
+          
+          
+          
+            setReport(reportData);
+
+            console.log("Career Report");
+
+            console.log(reportData);
+          
+            setCareerReadiness(readinessData);
+
+            console.log("Career Readiness");
+
+            console.log(readinessData);
+          
+    
   
           }
   
@@ -74,9 +95,9 @@ function Dashboard(){
 
                 title="Career Readiness"
 
-                value="72"
+                value={careerReadiness?.score ?? "--"}
 
-                subtitle="+5% this month"
+                subtitle={careerReadiness?.grade ?? "Loading..."}
 
                 />
 
@@ -84,9 +105,9 @@ function Dashboard(){
 
                 title="ATS Score"
 
-                value="68"
+                value="--"
 
-                subtitle="Keyword Density"
+                subtitle="Upload Job Description"
 
                 />
 
@@ -94,9 +115,9 @@ function Dashboard(){
 
                 title="Resume Score"
 
-                value={report.resume_score}
+                value={report?.resume_score ?? "--"}
 
-                subtitle={report.grade}
+                subtitle={report?.grade ?? "Loading..."}
 
                 />
 
@@ -110,7 +131,7 @@ function Dashboard(){
 
                 <p className="text-gray-300 mt-6">
 
-                {report.summary}
+                  {report?.summary ?? "Loading Summary..."}
 
                 </p>
 
@@ -122,11 +143,11 @@ function Dashboard(){
 
                 <div className="col-span-2">
 
-                    <RecommendationCard/>
+                <RecommendationCard report={report} />
 
                 </div>
 
-                <TargetRoles/>
+                <TargetRoles roles={report?.recommended_roles} />
 
             </div>
 
@@ -134,7 +155,7 @@ function Dashboard(){
 
                 <div className="col-span-2">
 
-                    <RecentActivity/>
+                <RecentActivity report={report} />
 
                 </div>
 

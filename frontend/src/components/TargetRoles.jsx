@@ -1,23 +1,12 @@
-function TargetRoles(){
+function TargetRoles( {roles} ){
 
-    const roles=[
 
-        {
-            name:"Backend Developer",
-            score:88
-        },
+    if (!roles) {
 
-        {
-            name:"Cloud Engineer",
-            score:76
-        },
+        return null;
+    
+    }
 
-        {
-            name:"DevOps Engineer",
-            score:69
-        }
-
-    ]
 
     return(
 
@@ -31,23 +20,24 @@ function TargetRoles(){
 
             {
 
-                roles.map(role=>(
+                roles?.map((role) => (
 
                     <div
-                    key={role.name}
-                    className="mt-8">
+                        key={role.role}
+                        className="mt-8"
+                    >
 
                         <div className="flex justify-between">
 
                             <span>
 
-                                {role.name}
+                                {role.role}
 
                             </span>
 
                             <span>
 
-                                {role.score}%
+                                {role.match_score}%
 
                             </span>
 
@@ -57,19 +47,17 @@ function TargetRoles(){
 
                             <div
 
-                            className="bg-purple-600 h-3 rounded-full"
+                                className="bg-purple-600 h-3 rounded-full"
 
-                            style={{
+                                style={{
+                                    width: `${role.match_score}%`
+                                }}
 
-                                width:`${role.score}%`
+                                />
 
-                            }}
-
-                            />
+                            </div>
 
                         </div>
-
-                    </div>
 
                 ))
 
@@ -82,3 +70,5 @@ function TargetRoles(){
 }
 
 export default TargetRoles;
+
+

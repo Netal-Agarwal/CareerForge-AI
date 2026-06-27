@@ -1,4 +1,10 @@
-function RecentActivity(){
+function RecentActivity({report}){
+
+    if (!report) {
+
+        return null;
+    
+    }
 
     return(
 
@@ -12,23 +18,32 @@ function RecentActivity(){
 
             <ul className="mt-8 space-y-5">
 
-                <li>
+            {
 
-                    Resume uploaded
+                report?.learning_roadmap?.map((item) => (
 
-                </li>
+                    <li
+                        key={item.skill}
+                        className="bg-slate-900 rounded-lg p-4"
+                    >
 
-                <li>
+                        <p className="font-semibold">
 
-                    ATS score analyzed
+                            {item.skill}
 
-                </li>
+                        </p>
 
-                <li>
+                        <p className="text-gray-400 mt-2">
 
-                    Career roadmap generated
+                            Priority : {item.priority}
 
-                </li>
+                        </p>
+
+                    </li>
+
+                ))
+
+            }
 
             </ul>
 

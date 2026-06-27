@@ -1882,8 +1882,6 @@ Implemented a professional landing page feature section using reusable React com
 - Dynamic progress bars using inline styles.
 - Component-based UI architecture.
 
-
-
 # Week 8 Day 1
 
 ## Dashboard API Integration
@@ -1891,30 +1889,55 @@ Implemented a professional landing page feature section using reusable React com
 ### Completed
 
 - Configured Axios interceptor for JWT authentication.
-
 - Added authentication utility functions.
-
 - Created dashboard service layer.
-
 - Connected Dashboard to FastAPI.
-
 - Displayed Resume Score dynamically.
-
 - Displayed Resume Grade dynamically.
-
 - Displayed Career Summary dynamically.
-
 - Implemented loading state for asynchronous data fetching.
 
 ### Key Learnings
 
 - Axios request interceptors
-
 - Bearer token authentication
-
 - React useEffect for API calls
-
 - Service layer architecture
-
 - Managing asynchronous state with useState
+
+
+
+
+
+# Week 8 Day 2
+
+## Dynamic Dashboard Data
+
+### Completed
+
+- Connected Career Readiness API.
+
+- Connected ATS Score API.
+
+- Connected Resume Score API.
+
+- Displayed strengths dynamically.
+
+- Displayed recommended roles dynamically.
+
+- Displayed learning roadmap dynamically.
+
+- Removed several hardcoded dashboard values.
+
+### Key Learnings
+
+- Multiple API requests in React.
+
+- Combining asynchronous data.
+
+- Passing props between components.
+
+- Optional chaining for async rendering.
+
+- Building a dynamic dashboard from backend APIs.
 
