@@ -1,8 +1,22 @@
+import DashboardLayout from "../components/DashboardLayout";
+
 function Dashboard() {
   return (
-    <div className="min-h-screen bg-slate-900 flex justify-center items-center text-white text-5xl">
-      Dashboard
-    </div>
+    <DashboardLayout>
+
+      <div className="grid grid-cols-3 gap-8">
+
+        <div className="bg-slate-800 rounded-2xl p-8 h-52">
+          Dashboard Cards Coming Tomorrow
+        </div>
+
+        <div className="bg-slate-800 rounded-2xl p-8 h-52" />
+
+        <div className="bg-slate-800 rounded-2xl p-8 h-52" />
+
+      </div>
+
+    </DashboardLayout>
   );
 }
 
