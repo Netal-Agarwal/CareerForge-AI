@@ -1799,8 +1799,6 @@ Implemented a professional landing page feature section using reusable React com
 - Reusable UI design
 - Modern SaaS landing page structure
 
-
-
 # Week 7 Day 4
 
 ## Premium Landing Page Enhancements
@@ -1808,24 +1806,51 @@ Implemented a professional landing page feature section using reusable React com
 ### Tasks Completed
 
 - Created DashboardPreview component.
-
 - Added AI recommendation panel.
-
 - Added CTA section.
-
 - Improved hero spacing.
-
 - Enhanced navbar with glassmorphism.
-
 - Improved visual hierarchy.
 
 ### Key Learnings
 
 - Breaking large UIs into reusable React components.
-
 - Building dashboard-style cards.
-
 - Using gradients and backdrop blur for modern UI.
-
 - Creating engaging call-to-action sections.
 
+
+
+
+
+# Week 7 Day 5
+
+## Login Authentication Integration
+
+### Completed
+
+- Built Login page UI using React and Tailwind CSS.
+
+- Connected frontend to FastAPI `/login` endpoint using Axios.
+
+- Fixed CORS configuration between React and FastAPI.
+
+- Successfully authenticated users against PostgreSQL.
+
+- Stored JWT token in browser Local Storage.
+
+- Redirected authenticated users to the Dashboard.
+
+### Key Learnings
+
+- React authentication flow
+
+- Axios POST requests
+
+- JWT token handling
+
+- FastAPI CORS middleware
+
+- Browser Local Storage
+
+- Frontend-backend integration
