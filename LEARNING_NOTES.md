@@ -1861,10 +1861,6 @@ Implemented a professional landing page feature section using reusable React com
 - Responsive dashboard architecture.
 - Separation of layout and page content.
 
-
-
-
-
 # Week 7 Day 7
 
 ## Complete Dashboard UI
@@ -1872,25 +1868,53 @@ Implemented a professional landing page feature section using reusable React com
 ### Completed
 
 - Created reusable Analytics Card component.
-
 - Added AI Recommendation section.
-
 - Built Target Roles progress card.
-
 - Added Recent Activity panel.
-
 - Added Interview Prep promotional panel.
-
 - Assembled the complete dashboard layout.
 
 ### Key Learnings
 
 - Building dashboards with reusable React components.
-
 - CSS Grid for responsive layouts.
-
 - Rendering lists with `map()`.
-
 - Dynamic progress bars using inline styles.
-
 - Component-based UI architecture.
+
+
+
+# Week 8 Day 1
+
+## Dashboard API Integration
+
+### Completed
+
+- Configured Axios interceptor for JWT authentication.
+
+- Added authentication utility functions.
+
+- Created dashboard service layer.
+
+- Connected Dashboard to FastAPI.
+
+- Displayed Resume Score dynamically.
+
+- Displayed Resume Grade dynamically.
+
+- Displayed Career Summary dynamically.
+
+- Implemented loading state for asynchronous data fetching.
+
+### Key Learnings
+
+- Axios request interceptors
+
+- Bearer token authentication
+
+- React useEffect for API calls
+
+- Service layer architecture
+
+- Managing asynchronous state with useState
+

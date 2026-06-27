@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import DashboardLayout from "../components/DashboardLayout";
 
 import AnalyticsCard from "../components/AnalyticsCard";
@@ -5,7 +7,62 @@ import RecommendationCard from "../components/RecommendationCard";
 import TargetRoles from "../components/TargetRoles";
 import RecentActivity from "../components/RecentActivity";
 
+import { getCareerReport } from "../services/dashboardServices";
+
+
+
 function Dashboard(){
+
+    const [report, setReport] = useState(null);
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+
+      async function loadDashboard() {
+  
+          try {
+  
+              const data = await getCareerReport(
+                  "backend_developer"
+              );
+  
+              setReport(data);
+  
+          }
+  
+          catch (error) {
+  
+              console.log(error);
+  
+          }
+  
+          finally {
+  
+              setLoading(false);
+  
+          }
+  
+      }
+  
+      loadDashboard();
+  
+    }, []);
+
+
+  if (loading) {
+
+    return (
+
+        <div className="min-h-screen flex justify-center items-center bg-slate-900 text-white text-3xl">
+
+            Loading Dashboard...
+
+        </div>
+
+    );
+
+}
 
     return(
 
@@ -37,11 +94,27 @@ function Dashboard(){
 
                 title="Resume Score"
 
-                value="75"
+                value={report.resume_score}
 
-                subtitle="Strong Experience"
+                subtitle={report.grade}
 
                 />
+
+                <div className="bg-slate-800 rounded-2xl p-8 mt-8">
+
+                <h2 className="text-2xl font-bold">
+
+                Career Summary
+
+                </h2>
+
+                <p className="text-gray-300 mt-6">
+
+                {report.summary}
+
+                </p>
+
+                </div>
 
             </div>
 
