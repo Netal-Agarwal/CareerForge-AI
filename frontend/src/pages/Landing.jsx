@@ -1,8 +1,18 @@
 import Navbar from "../components/Navbar";
+import FeatureCard from "../components/FeatureCard";
+
+import {
+    FaRobot,
+    FaFileAlt,
+    FaChartLine,
+    FaGraduationCap,
+    FaBriefcase,
+    FaUserTie
+} from "react-icons/fa";
 
 function Landing() {
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
       <Navbar />
 
       {/* Hero */}
@@ -35,7 +45,7 @@ function Landing() {
 
           <div className="mt-10 flex justify-center gap-5">
 
-            <button className="bg-purple-600 px-8 py-4 rounded-xl hover:bg-purple-700 transition">
+            <button className="bg-purple-600 hover:bg-purple-700 px-8 py-4 rounded-xl font-semibold shadow-lg shadow-purple-600/30 transition">
               Get Started
             </button>
 
@@ -71,6 +81,69 @@ function Landing() {
         <div className="text-center">
           <h2 className="text-4xl font-bold text-purple-400">24/7</h2>
           <p className="text-gray-400">AI Guidance</p>
+        </div>
+
+      </section>
+
+      {/* Features */}
+
+      <section className="max-w-7xl mx-auto py-24 px-8">
+
+        <h2 className="text-5xl font-bold text-center mb-5">
+
+          Why Choose
+
+          <span className="text-purple-500">
+            {" "}CareerForge AI?
+          </span>
+
+        </h2>
+
+        <p className="text-center text-gray-400 mb-16">
+
+          Everything you need to prepare for placements,
+          internships and professional careers.
+
+        </p>
+
+        <div className="grid grid-cols-3 gap-8">
+
+          <FeatureCard
+            icon={<FaFileAlt />}
+            title="Resume Analysis"
+            description="Analyze resumes and identify missing skills."
+          />
+
+          <FeatureCard
+            icon={<FaChartLine />}
+            title="ATS Optimization"
+            description="Improve ATS compatibility using intelligent recommendations."
+          />
+
+          <FeatureCard
+            icon={<FaRobot />}
+            title="AI Career Coach"
+            description="Receive personalized career guidance powered by AI."
+          />
+
+          <FeatureCard
+            icon={<FaGraduationCap />}
+            title="Learning Roadmaps"
+            description="Get structured 30/60/90 day learning plans."
+          />
+
+          <FeatureCard
+            icon={<FaBriefcase />}
+            title="Job Readiness"
+            description="Measure your career readiness using multiple metrics."
+          />
+
+          <FeatureCard
+            icon={<FaUserTie />}
+            title="Interview Preparation"
+            description="Practice interview questions based on your skills."
+          />
+
         </div>
 
       </section>
