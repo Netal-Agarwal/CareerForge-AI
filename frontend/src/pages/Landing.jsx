@@ -1,85 +1,80 @@
-import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 function Landing() {
-  const features = [
-    {
-      title: "Resume Intelligence",
-      description: "Upload your resume and extract skills automatically from PDF.",
-    },
-    {
-      title: "ATS Optimization",
-      description: "Compare your profile against job descriptions and improve keyword match.",
-    },
-    {
-      title: "Career Roadmap",
-      description: "Get prioritized skill gaps and a personalized learning path.",
-    },
-    {
-      title: "Interview Prep",
-      description: "Practice with skill-based interview questions tailored to your resume.",
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-slate-900 text-white">
-      <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-        <h1 className="text-2xl font-bold text-purple-400">CareerForge AI</h1>
-        <div className="flex gap-3">
-          <Link
-            to="/login"
-            className="rounded-lg px-4 py-2 text-sm font-medium text-slate-300 hover:text-white"
-          >
-            Log in
-          </Link>
-          <Link
-            to="/register"
-            className="rounded-lg bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-500"
-          >
-            Get started
-          </Link>
-        </div>
-      </header>
+      <Navbar />
 
-      <main className="mx-auto max-w-6xl px-6 py-16">
-        <section className="text-center">
-          <p className="text-sm font-medium uppercase tracking-widest text-purple-400">
-            AI Career Intelligence Platform
+      {/* Hero */}
+
+      <section className="max-w-7xl mx-auto px-10 py-24">
+
+        <div className="text-center">
+
+          <p className="text-purple-400 font-medium mb-4">
+            AI Powered Career Intelligence
           </p>
-          <h2 className="mt-4 text-5xl font-bold leading-tight">
-            Forge your career with AI-powered insights
-          </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-400">
-            Analyze resumes, measure ATS readiness, close skill gaps, and prepare
-            for interviews — all in one dashboard.
+
+          <h1 className="text-6xl font-bold leading-tight">
+
+            Engineer Your
+
+            <span className="text-purple-500">
+              {" "}Professional Future
+            </span>
+
+          </h1>
+
+          <p className="text-gray-400 mt-8 max-w-3xl mx-auto text-lg">
+
+            Analyze your resume, measure ATS compatibility,
+            identify skill gaps and receive an AI-powered
+            roadmap to land your dream job.
+
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/register"
-              className="rounded-xl bg-purple-600 px-8 py-3 font-semibold hover:bg-purple-500"
-            >
-              Start for free
-            </Link>
-            <Link
-              to="/login"
-              className="rounded-xl border border-slate-600 px-8 py-3 font-semibold text-slate-200 hover:border-purple-500"
-            >
-              Sign in
-            </Link>
+
+          <div className="mt-10 flex justify-center gap-5">
+
+            <button className="bg-purple-600 px-8 py-4 rounded-xl hover:bg-purple-700 transition">
+              Get Started
+            </button>
+
+            <button className="border border-gray-600 px-8 py-4 rounded-xl hover:bg-slate-800 transition">
+              View Demo
+            </button>
+
           </div>
-        </section>
 
-        <section className="mt-24 grid gap-6 sm:grid-cols-2">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="rounded-xl border border-slate-700/60 bg-slate-800/50 p-6"
-            >
-              <h3 className="text-lg font-semibold text-white">{feature.title}</h3>
-              <p className="mt-2 text-sm text-slate-400">{feature.description}</p>
-            </div>
-          ))}
-        </section>
-      </main>
+        </div>
+
+      </section>
+
+      {/* Statistics */}
+
+      <section className="max-w-6xl mx-auto grid grid-cols-4 gap-8 pb-20">
+
+        <div className="text-center">
+          <h2 className="text-4xl font-bold text-purple-400">500+</h2>
+          <p className="text-gray-400">Resumes Analysed</p>
+        </div>
+
+        <div className="text-center">
+          <h2 className="text-4xl font-bold text-purple-400">1000+</h2>
+          <p className="text-gray-400">Skills Evaluated</p>
+        </div>
+
+        <div className="text-center">
+          <h2 className="text-4xl font-bold text-purple-400">45+</h2>
+          <p className="text-gray-400">Industries Covered</p>
+        </div>
+
+        <div className="text-center">
+          <h2 className="text-4xl font-bold text-purple-400">24/7</h2>
+          <p className="text-gray-400">AI Guidance</p>
+        </div>
+
+      </section>
+
     </div>
   );
 }
