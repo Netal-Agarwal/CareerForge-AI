@@ -1628,10 +1628,6 @@ to generate personalized plans.
 - Career coaching systems
 - Recommendation workflows
 
-
-
-
-
 # Week 6 Day 7
 
 ## Executive Dashboard
@@ -1647,26 +1643,116 @@ to aggregate all CareerForge intelligence into a single endpoint.
 Generated:
 
 - Resume Score
-
 - ATS Score
-
 - Career Readiness Score
-
 - Skill Priorities
-
 - Career Roadmap
-
 - Interview Questions
-
 - Executive Summary
 
 ## Key Learnings
 
 - Dashboard aggregation
-
 - API composition
-
 - Data orchestration
-
 - Career intelligence systems
+
+
+
+# Week 7 Day 1 – React Frontend Setup
+
+## Objective
+
+Started the frontend development of CareerForge AI by setting up a professional React development environment and project architecture.
+
+---
+
+## Technologies Used
+
+- React 19
+- Vite
+- Tailwind CSS v4
+- Axios
+- React Router DOM
+
+---
+
+## Tasks Completed
+
+### React Frontend Initialization
+
+- Created a new React application using Vite.
+- Installed all project dependencies.
+- Verified the development server was running successfully.
+
+### Tailwind CSS Configuration
+
+Configured Tailwind CSS for utility-first styling throughout the application.
+
+### Project Structure
+
+Organized the frontend into a scalable folder structure.
+
+Created:
+
+- assets/
+- components/
+- context/
+- pages/
+- services/
+
+### Components Folder
+
+Prepared reusable UI component files:
+
+- Navbar
+- Sidebar
+- StatCard
+- ProgressCard
+- UploadBox
+- SkillCard
+- ProtectedRoute
+
+### Pages Folder
+
+Created placeholders for all application pages:
+
+- Landing
+- Login
+- Register
+- Dashboard
+- Resume Upload
+- Resume Analysis
+- ATS Score
+- Career Readiness
+- Skill Gap
+- Roadmap
+- Interview Preparation
+- Executive Dashboard
+- Profile
+
+### API Layer
+
+Created a centralized Axios instance (`api.js`) for communication with the FastAPI backend.
+
+Using a centralized API service improves maintainability by avoiding repeated backend URLs throughout the project.
+
+---
+
+## Key Learnings
+
+- Setting up a React project using Vite.
+- Configuring Tailwind CSS with Vite.
+- Creating a scalable React folder architecture.
+- Separating pages, components, context, and services.
+- Preparing reusable UI components.
+- Creating a centralized API communication layer using Axios.
+
+---
+
+## Outcome
+
+Successfully established the frontend foundation for CareerForge AI.
+
+The project is now ready for implementing authentication pages, dashboard components, and backend API integration.
 
