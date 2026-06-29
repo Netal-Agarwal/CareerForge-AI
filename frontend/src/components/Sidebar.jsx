@@ -6,6 +6,8 @@ import {
     FaUserTie,
     FaSignOutAlt,
   } from "react-icons/fa";
+
+  import { Link } from "react-router-dom";
   
   function Sidebar() {
     return (
@@ -20,17 +22,53 @@ import {
         </p>
   
         <nav className="mt-12">
-  
-          <Menu icon={<FaHome />} text="Dashboard" active />
-  
-          <Menu icon={<FaFileAlt />} text="Resume Analysis" />
-  
-          <Menu icon={<FaChartLine />} text="ATS Score" />
-  
-          <Menu icon={<FaRoad />} text="Roadmap" />
-  
-          <Menu icon={<FaUserTie />} text="Interview Prep" />
-  
+
+            <Link to="/dashboard">
+
+                <Menu
+                    icon={<FaHome />}
+                    text="Dashboard"
+                    active
+                />
+
+            </Link>
+
+            <Link to="/upload-resume">
+
+                <Menu
+                    icon={<FaFileAlt />}
+                    text="Resume Analysis"
+                />
+
+            </Link>
+
+            <Link to="/ats-score">
+
+                <Menu
+                    icon={<FaChartLine />}
+                    text="ATS Score"
+                />
+
+            </Link>
+
+            <Link to="/roadmap">
+
+                <Menu
+                    icon={<FaRoad />}
+                    text="Roadmap"
+                />
+
+            </Link>
+
+            <Link to="/interview-prep">
+
+                <Menu
+                    icon={<FaUserTie />}
+                    text="Interview Prep"
+                />
+
+            </Link>
+
         </nav>
   
         <div className="absolute bottom-10">

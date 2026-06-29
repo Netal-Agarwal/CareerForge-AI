@@ -1927,37 +1927,59 @@ Implemented a professional landing page feature section using reusable React com
 - Optional chaining for async rendering.
 - Building a dynamic dashboard from backend APIs.
 
-
-
 ## Week 8 Day 3
 
 ### Topics Learned
 
 - File uploads in React using FormData
-
 - Handling multipart/form-data requests
-
 - Connecting file upload APIs with Axios
-
 - File selection using input type="file"
-
 - Redirecting after successful uploads
-
 - Upload state management with React
 
 ### Files Created
 
 - src/pages/ResumeUpload.jsx
-
 - src/services/resumeService.js
 
 ### Files Modified
 
 - src/App.jsx
-
 - src/components/DashboardLayout.jsx
 
 ### Outcome
 
 Implemented the resume upload page and integrated it with the backend upload API, allowing authenticated users to upload PDF resumes directly from the dashboard.
 
+
+
+## Week 8 Day 4
+
+### Topics Learned
+
+- Calling POST APIs with Axios
+
+- Sending query parameters using params
+
+- Displaying dynamic lists in React
+
+- ATS analysis workflow
+
+- Rendering matched and missing skills
+
+### Files Created
+
+- src/pages/ATSScore.jsx
+
+- src/services/atsService.js
+
+### Files Modified
+
+- src/App.jsx
+
+- src/components/Sidebar.jsx
+
+### Outcome
+
+Built an ATS Score Analyzer page that accepts a job description, sends it to the backend, and displays the ATS score along with matched and missing skills.
