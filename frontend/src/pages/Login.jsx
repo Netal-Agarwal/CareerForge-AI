@@ -33,15 +33,20 @@ function Login() {
       console.log("Sending request to backend...");
   
       const response = await api.post("/login", formData);
-  
-      console.log("✅ SUCCESS");
-      console.log(response);
-  
+      
+      console.log("LOGIN RESPONSE:", response.data);
+
+      //console.log("✅ SUCCESS");
+      //console.log(response);
+      
+      //console.log(response.data);
+
       localStorage.setItem(
         "token",
         response.data.access_token
       );
-  
+      console.log("TOKEN SAVED:", localStorage.getItem("token"));
+      
       navigate("/dashboard");
   
     } catch (error) {

@@ -1952,34 +1952,43 @@ Implemented a professional landing page feature section using reusable React com
 
 Implemented the resume upload page and integrated it with the backend upload API, allowing authenticated users to upload PDF resumes directly from the dashboard.
 
-
-
 ## Week 8 Day 4
 
 ### Topics Learned
 
 - Calling POST APIs with Axios
-
 - Sending query parameters using params
-
 - Displaying dynamic lists in React
-
 - ATS analysis workflow
-
 - Rendering matched and missing skills
 
 ### Files Created
 
 - src/pages/ATSScore.jsx
-
 - src/services/atsService.js
 
 ### Files Modified
 
 - src/App.jsx
-
 - src/components/Sidebar.jsx
 
 ### Outcome
 
 Built an ATS Score Analyzer page that accepts a job description, sends it to the backend, and displays the ATS score along with matched and missing skills.
+
+
+
+
+
+## Week 8 – Day 5: Learning Notes
+
+- Integrated the **ATS Score API** with the React frontend using Axios.
+- Implemented **JWT-based authenticated API requests** through Axios interceptors.
+- Used **React state (**`useState`**)** to manage job description, ATS results, and loading state.
+- Performed asynchronous API calls using `async/await` with proper error handling.
+- Displayed the ATS score dynamically with a **color-coded progress bar**.
+- Rendered **matched** and **missing keywords** using React's `map()` function.
+- Added an **ATS Recommendation** section to guide users on improving their resume.
+- Practiced debugging by resolving **authentication**, **API integration**, and **JSX rendering** issues.
+- Successfully completed the end-to-end ATS analysis workflow from **frontend → backend → UI visualization**.
+
