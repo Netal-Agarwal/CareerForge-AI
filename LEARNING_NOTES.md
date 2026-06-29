@@ -1905,10 +1905,6 @@ Implemented a professional landing page feature section using reusable React com
 - Service layer architecture
 - Managing asynchronous state with useState
 
-
-
-
-
 # Week 8 Day 2
 
 ## Dynamic Dashboard Data
@@ -1916,28 +1912,52 @@ Implemented a professional landing page feature section using reusable React com
 ### Completed
 
 - Connected Career Readiness API.
-
 - Connected ATS Score API.
-
 - Connected Resume Score API.
-
 - Displayed strengths dynamically.
-
 - Displayed recommended roles dynamically.
-
 - Displayed learning roadmap dynamically.
-
 - Removed several hardcoded dashboard values.
 
 ### Key Learnings
 
 - Multiple API requests in React.
-
 - Combining asynchronous data.
-
 - Passing props between components.
-
 - Optional chaining for async rendering.
-
 - Building a dynamic dashboard from backend APIs.
+
+
+
+## Week 8 Day 3
+
+### Topics Learned
+
+- File uploads in React using FormData
+
+- Handling multipart/form-data requests
+
+- Connecting file upload APIs with Axios
+
+- File selection using input type="file"
+
+- Redirecting after successful uploads
+
+- Upload state management with React
+
+### Files Created
+
+- src/pages/ResumeUpload.jsx
+
+- src/services/resumeService.js
+
+### Files Modified
+
+- src/App.jsx
+
+- src/components/DashboardLayout.jsx
+
+### Outcome
+
+Implemented the resume upload page and integrated it with the backend upload API, allowing authenticated users to upload PDF resumes directly from the dashboard.
 

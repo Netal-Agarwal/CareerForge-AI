@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Topbar() {
     return (
       <header className="flex justify-between items-center mb-10">
@@ -14,11 +16,12 @@ function Topbar() {
   
         </div>
   
-        <button className="bg-purple-600 px-6 py-3 rounded-xl hover:bg-purple-700">
-  
-          Upload Resume
-  
-        </button>
+        <Link
+            to="/upload-resume"
+            className="bg-purple-600 px-8 py-4 rounded-xl hover:bg-purple-700 transition"
+        >
+            Upload Resume
+        </Link>
   
       </header>
     );

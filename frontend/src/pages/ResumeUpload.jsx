@@ -1,95 +1,114 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import UploadBox from "../components/UploadBox";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:8000";
+import { uploadResume } from "../services/resumeService";
 
 function ResumeUpload() {
-  const [currentResume, setCurrentResume] = useState(null);
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const authHeaders = () => ({
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-  });
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/resume`, { headers: authHeaders() })
-      .then((response) => setCurrentResume(response.data))
-      .catch(() => setCurrentResume(null));
-  }, []);
+    const [file, setFile] = useState(null);
 
-  const handleUpload = async (file) => {
-    setMessage("");
-    setError("");
-    setLoading(true);
+    const [loading, setLoading] = useState(false);
 
-    const formData = new FormData();
-    formData.append("file", file);
+    const handleUpload = async () => {
 
-    try {
-      const response = await axios.post(
-        `${API_URL}/upload-resume`,
-        formData,
-        {
-          headers: {
-            ...authHeaders(),
-            "Content-Type": "multipart/form-data",
-          },
-        },
-      );
-      setMessage(response.data.message);
-      setCurrentResume({ file_name: response.data.file_name });
-    } catch (err) {
-      setError(
-        err.response?.data?.detail || "Upload failed. Please try again.",
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+        if (!file) {
 
-  return (
-    <div className="min-h-screen bg-slate-900">
-      <div className="mx-auto max-w-3xl px-6 py-10">
-        <h1 className="text-3xl font-bold text-white">Resume Upload</h1>
-        <p className="mt-2 text-slate-400">
-          Upload your PDF resume to unlock analysis and career insights.
-        </p>
+            alert("Please select a PDF.");
 
-        {currentResume && (
-          <p className="mt-6 rounded-lg border border-slate-700/60 bg-slate-800/50 px-4 py-3 text-sm text-slate-300">
-            Current resume:{" "}
-            <span className="font-medium text-white">
-              {currentResume.file_name}
-            </span>
-          </p>
-        )}
+            return;
 
-        <div className="mt-8">
-          <UploadBox
-            onFileSelect={handleUpload}
-            disabled={loading}
-            label={loading ? "Uploading..." : "Upload your resume"}
-          />
+        }
+
+        setLoading(true);
+
+        try {
+
+            await uploadResume(file);
+
+            alert("Resume uploaded successfully!");
+
+            navigate("/dashboard");
+
+        }
+
+        catch (error) {
+
+            console.log(error);
+
+            alert("Upload failed.");
+
+        }
+
+        finally {
+
+            setLoading(false);
+
+        }
+
+    };
+
+    return (
+
+        <div className="min-h-screen bg-slate-900 flex justify-center items-center">
+
+            <div className="bg-slate-800 rounded-3xl p-10 w-[550px]">
+
+                <h1 className="text-4xl font-bold text-white">
+
+                    Upload Resume
+
+                </h1>
+
+                <p className="text-gray-400 mt-3">
+
+                    Upload your latest resume in PDF format.
+
+                </p>
+
+                <input
+
+                    type="file"
+
+                    accept=".pdf"
+
+                    onChange={(e) => setFile(e.target.files[0])}
+
+                    className="mt-10 text-white"
+
+                />
+
+                <button
+
+                    onClick={handleUpload}
+
+                    className="mt-8 w-full bg-purple-600 py-4 rounded-xl text-white font-semibold hover:bg-purple-700"
+
+                >
+
+                    {
+
+                        loading
+
+                        ?
+
+                        "Uploading..."
+
+                        :
+
+                        "Upload Resume"
+
+                    }
+
+                </button>
+
+            </div>
+
         </div>
 
-        {message && (
-          <p className="mt-4 rounded-lg bg-emerald-500/10 px-4 py-3 text-sm text-emerald-400">
-            {message}
-          </p>
-        )}
+    );
 
-        {error && (
-          <p className="mt-4 rounded-lg bg-red-500/10 px-4 py-3 text-sm text-red-400">
-            {error}
-          </p>
-        )}
-      </div>
-    </div>
-  );
 }
 
 export default ResumeUpload;
