@@ -1,109 +1,156 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import ProgressCard from "../components/ProgressCard";
-import StatCard from "../components/StatCard";
-
-const API_URL = "http://localhost:8000";
-
-const CAREER_TRACKS = [
-  { value: "backend_developer", label: "Backend Developer" },
-  { value: "data_scientist", label: "Data Scientist" },
-  { value: "devops_engineer", label: "DevOps Engineer" },
-  { value: "fullstack_developer", label: "Full Stack Developer" },
-];
+import { getCareerReadiness } from "../services/careerReadinessService";
 
 function CareerReadiness() {
-  const [careerTrack, setCareerTrack] = useState("backend_developer");
-  const [data, setData] = useState(null);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setLoading(true);
-    setError("");
+    const [report, setReport] = useState(null);
 
-    axios
-      .get(`${API_URL}/career-readiness`, {
-        params: { career_track: careerTrack },
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((response) => setData(response.data))
-      .catch((err) => {
-        setData(null);
-        setError(
-          err.response?.data?.detail ||
-            "Could not load career readiness. Upload a resume first.",
-        );
-      })
-      .finally(() => setLoading(false));
-  }, [careerTrack]);
+    const [loading, setLoading] = useState(true);
 
-  return (
-    <div className="min-h-screen bg-slate-900">
-      <div className="mx-auto max-w-4xl px-6 py-10">
-        <h1 className="text-3xl font-bold text-white">Career Readiness</h1>
-        <p className="mt-2 text-slate-400">
-          Combined score based on resume quality, ATS fit, and skill proficiency.
-        </p>
+    useEffect(() => {
 
-        <div className="mt-6">
-          <label className="mb-2 block text-sm font-medium text-slate-300">
-            Career track
-          </label>
-          <select
-            value={careerTrack}
-            onChange={(event) => setCareerTrack(event.target.value)}
-            className="rounded-lg border border-slate-600 bg-slate-800 px-4 py-2 text-white outline-none focus:border-purple-500"
-          >
-            {CAREER_TRACKS.map((track) => (
-              <option key={track.value} value={track.value}>
-                {track.label}
-              </option>
-            ))}
-          </select>
+      async function loadReport() {
+  
+          try {
+  
+              const data = await getCareerReadiness(
+                  "backend_developer"
+              );
+              
+              console.log(data);
+              
+              setReport(data);
+  
+          }
+  
+          catch(error){
+  
+              console.log(error);
+  
+          }
+  
+          finally{
+  
+              setLoading(false);
+  
+          }
+  
+      }
+  
+      loadReport();
+  
+  }, []);
+
+  if (loading) {
+
+    return (
+
+        <div className="min-h-screen flex items-center justify-center bg-slate-900 text-white text-3xl">
+
+            Loading Career Report...
+
         </div>
 
-        {loading && (
-          <p className="mt-8 text-slate-400">Loading readiness score...</p>
-        )}
+    );
 
-        {error && (
-          <p className="mt-8 rounded-lg bg-red-500/10 px-4 py-3 text-sm text-red-400">
-            {error}
+}
+
+return (
+
+  <div className="min-h-screen bg-slate-900 text-white p-10">
+
+      <h1 className="text-5xl font-bold mb-10">
+
+          Career Readiness Report
+
+      </h1>
+
+      <div className="bg-slate-800 rounded-2xl p-8">
+
+          <h2 className="text-2xl font-semibold text-gray-300">
+
+              Overall Career Readiness
+
+          </h2>
+
+          <p className="text-6xl font-bold text-purple-400 mt-6">
+
+              {report?.score}%
+
           </p>
-        )}
 
-        {data && (
-          <div className="mt-8 space-y-6">
-            <ProgressCard
-              label="Career Readiness"
-              value={data.career_readiness_score}
-              color="purple"
-              description={data.readiness_level}
-            />
+          <p className="text-xl mt-4 text-gray-300">
 
-            <div className="grid gap-6 sm:grid-cols-3">
-              <StatCard title="Resume Score" value={`${data.resume_score}%`} />
-              <StatCard title="ATS Score" value={`${data.ats_score}%`} />
-              <StatCard
-                title="Proficiency Bonus"
-                value={`+${data.proficiency_bonus}`}
-              />
-            </div>
+              Grade : {report?.grade}
 
-            {data.advice && (
-              <div className="rounded-xl border border-slate-700/60 bg-slate-800/50 p-5">
-                <h2 className="text-lg font-semibold text-white">Advice</h2>
-                <p className="mt-2 text-sm text-slate-400">{data.advice}</p>
-              </div>
-            )}
+          </p>
+
+          <div className="w-full bg-slate-700 rounded-full h-4 mt-8">
+
+            <div
+
+              className="bg-purple-600 h-4 rounded-full transition-all duration-700"
+
+              style={{
+
+                width: `${report?.score}%`
+
+              }}
+
+            ></div>
+
           </div>
-        )}
+
       </div>
-    </div>
-  );
+
+      <div className="bg-slate-800 rounded-2xl p-8 mt-8">
+
+        <h2 className="text-2xl font-bold">
+
+            Career Advice
+
+        </h2>
+
+        <p className="text-gray-300 mt-5">
+
+            {report?.advice}
+
+        </p>
+
+      </div>
+
+      <div className="bg-slate-800 rounded-2xl p-8 mt-8">
+
+        <h2 className="text-2xl font-bold">
+
+            Priority Skill Gaps
+
+        </h2>
+
+        <ul className="mt-6 space-y-3">
+
+            {report?.priority_skill_gaps?.map((skill) => (
+
+              <li
+                key={skill}
+                className="bg-slate-900 rounded-lg p-4"
+              >
+
+                {skill}
+
+              </li>
+
+            ))}
+
+        </ul>
+
+      </div>
+
+        
+  </div>
+
+);
+
 }
 
 export default CareerReadiness;
