@@ -1121,17 +1121,20 @@ INTERVIEW_QUESTIONS = {
 
         {
             "question": "What are Python decorators?",
-            "difficulty": "Medium"
+            "difficulty": "Medium",
+            "answer": "Decorators are functions that modify the behavior of another function without changing its source code. They are commonly used for logging, authentication, caching, and validation."
         },
 
         {
             "question": "Explain list comprehension.",
-            "difficulty": "Easy"
+            "difficulty": "Easy",
+            "answer":"List comprehension is a concise way of creating lists in Python using a single line of code with optional filtering conditions."
         },
 
         {
             "question": "What is the difference between a list and a tuple?",
-            "difficulty": "Easy"
+            "difficulty": "Easy",
+            "answer": "Lists are mutable, meaning their contents can be modified after creation, whereas tuples are immutable and cannot be changed. Tuples are generally faster and are often used for fixed collections of data."
         }
 
     ],
@@ -1140,12 +1143,14 @@ INTERVIEW_QUESTIONS = {
 
         {
             "question": "What are FastAPI dependencies?",
-            "difficulty": "Medium"
+            "difficulty": "Medium",
+            "answer": "FastAPI dependencies are reusable components that automatically provide objects or execute logic before a request reaches an endpoint. They are commonly used for authentication, database sessions, validation, and shared business logic."
         },
 
         {
             "question": "Why is FastAPI faster than Flask?",
-            "difficulty": "Medium"
+            "difficulty": "Medium",
+            "answer": "FastAPI is built on Starlette and uses asynchronous programming with ASGI, allowing it to handle many concurrent requests efficiently. It also uses Pydantic for fast data validation and automatic request parsing."
         }
 
     ],
@@ -1154,12 +1159,14 @@ INTERVIEW_QUESTIONS = {
 
         {
             "question": "Explain normalization.",
-            "difficulty": "Easy"
+            "difficulty": "Easy",
+            "answer": "Normalization is the process of organizing data into related tables to reduce redundancy and improve data integrity. Common normal forms include 1NF, 2NF, and 3NF."
         },
 
         {
             "question": "Difference between DELETE and TRUNCATE?",
-            "difficulty": "Medium"
+            "difficulty": "Medium",
+            "answer": "DELETE removes selected rows and can be rolled back if used inside a transaction, while TRUNCATE removes all rows from a table, is faster, resets identity values, and cannot delete specific rows."
         }
 
     ],
@@ -1168,12 +1175,14 @@ INTERVIEW_QUESTIONS = {
 
         {
             "question": "What is EC2?",
-            "difficulty": "Easy"
+            "difficulty": "Easy",
+            "answer": "Amazon EC2 (Elastic Compute Cloud) is a web service that provides scalable virtual servers in the cloud for deploying and running applications."
         },
 
         {
             "question": "Explain IAM Roles.",
-            "difficulty": "Medium"
+            "difficulty": "Medium",
+            "answer": "IAM Roles provide temporary AWS credentials with specific permissions. They allow AWS services or users to securely access AWS resources without storing long-term access keys."
         }
 
     ],
@@ -1182,12 +1191,14 @@ INTERVIEW_QUESTIONS = {
 
         {
             "question": "Difference between merge and rebase?",
-            "difficulty": "Medium"
+            "difficulty": "Medium",
+            "answer": "Merge combines two branches while preserving commit history, whereas rebase moves commits onto a new base branch to create a cleaner and more linear history."
         },
 
         {
             "question": "Explain Git stash.",
-            "difficulty": "Easy"
+            "difficulty": "Easy",
+            "answer": "Git stash temporarily saves uncommitted changes without committing them, allowing you to switch branches or work on something else before restoring the changes later."
         }
 
     ]
@@ -1210,6 +1221,8 @@ def generate_interview_questions(skills):
             )
 
     return questions
+
+
 
 
 
