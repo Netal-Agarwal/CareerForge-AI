@@ -1,81 +1,157 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-
-const API_URL = "http://localhost:8000";
+import { getInterviewQuestions } from "../services/interviewService";
 
 function InterviewPrep() {
+
   const [data, setData] = useState(null);
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}/interview-questions`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((response) => setData(response.data))
-      .catch((err) => {
-        setError(
-          err.response?.data?.detail ||
-            "Could not load questions. Upload a resume first.",
-        );
-      })
-      .finally(() => setLoading(false));
+
+    async function loadQuestions() {
+
+      try {
+
+        const response = await getInterviewQuestions();
+
+        console.log(response);
+
+        setData(response);
+
+      }
+
+      catch (error) {
+
+        console.log(error);
+
+      }
+
+      finally {
+
+        setLoading(false);
+
+      }
+
+    }
+
+    loadQuestions();
+
   }, []);
 
-  return (
-    <div className="min-h-screen bg-slate-900">
-      <div className="mx-auto max-w-4xl px-6 py-10">
-        <h1 className="text-3xl font-bold text-white">Interview Prep</h1>
-        <p className="mt-2 text-slate-400">
-          Skill-based interview questions generated from your resume.
-        </p>
+  if (loading) {
 
-        {loading && (
-          <p className="mt-8 text-slate-400">Loading questions...</p>
-        )}
+    return (
 
-        {error && (
-          <p className="mt-8 rounded-lg bg-red-500/10 px-4 py-3 text-sm text-red-400">
-            {error}
-          </p>
-        )}
+      <div className="min-h-screen bg-slate-900 text-white flex justify-center items-center text-3xl">
 
-        {data && (
-          <div className="mt-8 space-y-8">
-            {data.skills?.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {data.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="rounded-full bg-purple-500/10 px-3 py-1 text-xs font-medium text-purple-300"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            )}
+        Loading Interview Questions...
 
-            <section className="space-y-4">
-              {data.questions?.map((question, index) => (
-                <div
-                  key={`${question}-${index}`}
-                  className="rounded-xl border border-slate-700/60 bg-slate-800/50 p-5"
-                >
-                  <p className="text-xs font-medium uppercase tracking-wide text-purple-400">
-                    Question {index + 1}
-                  </p>
-                  <p className="mt-2 text-sm text-slate-200">{question}</p>
-                </div>
-              ))}
-            </section>
-          </div>
-        )}
       </div>
+
+    );
+
+  }
+
+  return (
+
+    <div className="min-h-screen bg-slate-900 text-white p-10">
+
+      <h1 className="text-5xl font-bold">
+
+        AI Interview Preparation
+
+      </h1>
+
+      <p className="text-gray-400 mt-3">
+
+        Personalized interview questions based on your uploaded resume.
+
+      </p>
+
+      {/* Skills */}
+
+      <div className="mt-10">
+
+        <h2 className="text-2xl font-bold">
+
+          Skills Detected
+
+        </h2>
+
+        <div className="flex flex-wrap gap-3 mt-5">
+
+          {data?.skills?.map((skill) => (
+
+            <span
+
+              key={skill}
+
+              className="bg-purple-600 px-5 py-2 rounded-full"
+
+            >
+
+              {skill}
+
+            </span>
+
+          ))}
+
+        </div>
+
+      </div>
+
+      {/* Questions */}
+
+      <div className="mt-12">
+
+        <h2 className="text-2xl font-bold">
+
+          Interview Questions
+
+        </h2>
+
+        <div className="space-y-6 mt-6">
+
+          {data?.questions?.map((item, index) => (
+
+            <div
+
+              key={index}
+
+              className="bg-slate-800 rounded-2xl p-6"
+
+            >
+
+              <h3 className="text-xl font-semibold">
+
+                Question {index + 1}
+
+              </h3>
+
+              <p className="mt-4 text-lg">
+
+                {item.question}
+
+              </p>
+
+              <span className="inline-block mt-5 bg-green-600 px-4 py-2 rounded-full">
+
+                {item.difficulty}
+
+              </span>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      </div>
+
     </div>
+
   );
+
 }
 
 export default InterviewPrep;

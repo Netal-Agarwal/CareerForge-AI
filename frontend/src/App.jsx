@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import ResumeUpload from "./pages/ResumeUpload";
 import ATSScore from "./pages/ATSScore";
 import CareerReadiness from "./pages/CareerReadiness";
+import InterviewPrep from "./pages/InterviewPrep";
 
 function App() {
 
@@ -29,6 +30,8 @@ function App() {
         <Route path="/ats-score" element={<ATSScore />} />
 
         <Route path="/career-readiness" element={<CareerReadiness />} />
+
+        <Route path="/interview-prep" element={<InterviewPrep />} />
 
       </Routes>
 
