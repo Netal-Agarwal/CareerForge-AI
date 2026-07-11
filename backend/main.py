@@ -46,7 +46,8 @@ from parser import (
     get_readiness_advice,
     prioritize_skill_gaps,
     generate_career_roadmap,
-    generate_executive_summary
+    generate_executive_summary,
+    generate_interview_questions
 )
 
 from fastapi import Query
@@ -1682,6 +1683,65 @@ def executive_dashboard(
 
         "executive_summary":
             summary
+    }
+
+
+@app.get(
+    "/interview-questions",
+    tags=["Interview Prep"]
+)
+def interview_questions(
+
+    current_user: User = Depends(get_current_user),
+
+    db: Session = Depends(get_db)
+
+):
+
+    resume = db.query(
+
+        Resume
+
+    ).filter(
+
+        Resume.user_id == current_user.id
+
+    ).first()
+
+    if not resume:
+
+        raise HTTPException(
+
+            status_code=404,
+
+            detail="Resume not found"
+
+        )
+
+    text = extract_text_from_pdf(
+
+        resume.file_path
+
+    )
+
+    skills = extract_skills(
+
+        text
+
+    )
+
+    questions = generate_interview_questions(
+
+        skills
+
+    )
+
+    return {
+
+        "skills": skills,
+
+        "questions": questions
+
     }
 
 

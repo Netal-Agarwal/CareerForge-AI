@@ -1115,6 +1115,103 @@ def generate_executive_summary(
     )
 
 
+INTERVIEW_QUESTIONS = {
+
+    "Python": [
+
+        {
+            "question": "What are Python decorators?",
+            "difficulty": "Medium"
+        },
+
+        {
+            "question": "Explain list comprehension.",
+            "difficulty": "Easy"
+        },
+
+        {
+            "question": "What is the difference between a list and a tuple?",
+            "difficulty": "Easy"
+        }
+
+    ],
+
+    "FastAPI": [
+
+        {
+            "question": "What are FastAPI dependencies?",
+            "difficulty": "Medium"
+        },
+
+        {
+            "question": "Why is FastAPI faster than Flask?",
+            "difficulty": "Medium"
+        }
+
+    ],
+
+    "PostgreSQL": [
+
+        {
+            "question": "Explain normalization.",
+            "difficulty": "Easy"
+        },
+
+        {
+            "question": "Difference between DELETE and TRUNCATE?",
+            "difficulty": "Medium"
+        }
+
+    ],
+
+    "AWS": [
+
+        {
+            "question": "What is EC2?",
+            "difficulty": "Easy"
+        },
+
+        {
+            "question": "Explain IAM Roles.",
+            "difficulty": "Medium"
+        }
+
+    ],
+
+    "Git": [
+
+        {
+            "question": "Difference between merge and rebase?",
+            "difficulty": "Medium"
+        },
+
+        {
+            "question": "Explain Git stash.",
+            "difficulty": "Easy"
+        }
+
+    ]
+
+}
+
+
+def generate_interview_questions(skills):
+
+    questions = []
+
+    for skill in skills:
+
+        if skill in INTERVIEW_QUESTIONS:
+
+            questions.extend(
+
+                INTERVIEW_QUESTIONS[skill]
+
+            )
+
+    return questions
+
+
 
 
 
