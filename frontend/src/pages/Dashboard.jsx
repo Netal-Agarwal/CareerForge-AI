@@ -7,13 +7,14 @@ import RecommendationCard from "../components/RecommendationCard";
 import TargetRoles from "../components/TargetRoles";
 import RecentActivity from "../components/RecentActivity";
 
-import { getCareerReport,
-  getCareerReadiness,
- } from "../services/dashboardServices";
+import {
+    getCareerReport,
+    getCareerReadiness,
+} from "../services/dashboardServices";
 
 
 
-function Dashboard(){
+function Dashboard() {
 
     const [report, setReport] = useState(null);
 
@@ -24,116 +25,156 @@ function Dashboard(){
 
     useEffect(() => {
 
-      async function loadDashboard() {
-  
-          try {
-  
-            const reportData = await getCareerReport(
-              "backend_developer"
-            );
-          
-            const readinessData = await getCareerReadiness("backend_developer");
-          
-          
-          
-            setReport(reportData);
+        async function loadDashboard() {
 
-            console.log("Career Report");
+            try {
 
-            console.log(reportData);
-          
-            setCareerReadiness(readinessData);
+                const reportData = await getCareerReport(
+                    "backend_developer"
+                );
 
-            console.log("Career Readiness");
+                const readinessData = await getCareerReadiness("backend_developer");
 
-            console.log(readinessData);
-          
-    
-  
-          }
-  
-          catch (error) {
-  
-              console.log(error);
-  
-          }
-  
-          finally {
-  
-              setLoading(false);
-  
-          }
-  
-      }
-  
-      loadDashboard();
-  
+
+
+                setReport(reportData);
+
+                console.log("Career Report");
+
+                console.log(reportData);
+
+                setCareerReadiness(readinessData);
+
+                console.log("Career Readiness");
+
+                console.log(readinessData);
+
+
+
+            }
+
+            catch (error) {
+
+                console.log(error);
+
+            }
+
+            finally {
+
+                setLoading(false);
+
+            }
+
+        }
+
+        loadDashboard();
+
     }, []);
 
 
-  if (loading) {
+    if (loading) {
+
+        return (
+
+            <div className="min-h-screen flex justify-center items-center bg-slate-900 text-white text-3xl">
+
+                Loading Dashboard...
+
+            </div>
+
+        );
+
+    }
 
     return (
-
-        <div className="min-h-screen flex justify-center items-center bg-slate-900 text-white text-3xl">
-
-            Loading Dashboard...
-
-        </div>
-
-    );
-
-}
-
-    return(
 
         <DashboardLayout>
 
             <div className="grid grid-cols-3 gap-6">
 
+                <div className="bg-slate-800 rounded-2xl p-8">
+
+                    <h2 className="text-gray-400 text-xl">
+
+                        Career Readiness
+
+                    </h2>
+
+                    <p className="text-gray-500 mt-2">
+
+                        Backend Developer Track
+
+                    </p>
+
+                    <h1
+
+                        className={`text-6xl font-bold mt-6
+
+                        ${careerReadiness?.career_readiness_score >= 80
+
+                                ? "text-green-400"
+
+                                : careerReadiness?.career_readiness_score >= 60
+
+                                    ? "text-yellow-400"
+
+                                    : "text-red-400"
+
+                            }`}
+
+                    >
+
+                        {careerReadiness?.career_readiness_score}
+
+                    </h1>
+
+                    <p className="text-xl mt-4 text-green-300">
+
+                        {careerReadiness?.readiness_level}
+
+                    </p>
+
+                    <p className="text-gray-400 mt-6">
+
+                        {careerReadiness?.advice}
+
+                    </p>
+
+                </div>
+
                 <AnalyticsCard
 
-                title="Career Readiness"
+                    title="ATS Score"
 
-                value={careerReadiness?.score ?? "--"}
+                    value="--"
 
-                subtitle={careerReadiness?.grade ?? "Loading..."}
+                    subtitle="Upload Job Description"
 
                 />
 
                 <AnalyticsCard
 
-                title="ATS Score"
+                    title="Resume Score"
 
-                value="--"
+                    value={report?.resume_score ?? "--"}
 
-                subtitle="Upload Job Description"
-
-                />
-
-                <AnalyticsCard
-
-                title="Resume Score"
-
-                value={report?.resume_score ?? "--"}
-
-                subtitle={report?.grade ?? "Loading..."}
+                    subtitle={report?.grade ?? "Loading..."}
 
                 />
 
                 <div className="bg-slate-800 rounded-2xl p-8 mt-8">
 
-                <h2 className="text-2xl font-bold">
+                    <h2 className="text-2xl font-bold">
 
-                Career Summary
+                        Career Summary
 
-                </h2>
+                    </h2>
 
-                <p className="text-gray-300 mt-6">
+                    <p className="text-gray-300 mt-6">
 
-                  {report?.summary ?? "Loading Summary..."}
+                        {report?.summary ?? "Loading Summary..."}
 
-                </p>
+                    </p>
 
                 </div>
 
@@ -143,7 +184,7 @@ function Dashboard(){
 
                 <div className="col-span-2">
 
-                <RecommendationCard report={report} />
+                    <RecommendationCard report={report} />
 
                 </div>
 
@@ -155,7 +196,7 @@ function Dashboard(){
 
                 <div className="col-span-2">
 
-                <RecentActivity report={report} />
+                    <RecentActivity report={report} />
 
                 </div>
 
