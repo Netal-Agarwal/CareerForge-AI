@@ -7,6 +7,8 @@ function InterviewPrep() {
   const [openAnswer, setOpenAnswer] = useState(null);
   const [completedQuestions, setCompletedQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [isRunning, setIsRunning] = useState(true);
 
   useEffect(() => {
     async function loadQuestions() {
@@ -25,6 +27,24 @@ function InterviewPrep() {
 
     loadQuestions();
   }, []);
+
+  useEffect(() => {
+
+    let interval;
+
+    if (isRunning) {
+
+      interval = setInterval(() => {
+
+        setSeconds(prev => prev + 1);
+
+      }, 1000);
+
+    }
+
+    return () => clearInterval(interval);
+
+  }, [isRunning]);
 
   function toggleCompleted(index) {
 
@@ -116,8 +136,9 @@ function InterviewPrep() {
       : 0;
 
   const question =
-
     data?.questions?.[currentQuestion];
+  const minutes = String(Math.floor(seconds / 60)).padStart(2, "0");
+  const remainingSeconds = String(seconds % 60).padStart(2, "0");
 
   return (
     <div className="min-h-screen bg-slate-900 text-white p-10">
@@ -131,6 +152,64 @@ function InterviewPrep() {
       <p className="text-gray-400 mt-3">
         Personalized interview questions based on your uploaded resume.
       </p>
+
+      <div className="mt-8 bg-slate-800 rounded-2xl p-6">
+
+        <div className="flex justify-between items-center">
+
+          <div>
+
+            <h2 className="text-2xl font-bold">
+
+              Interview Timer
+
+            </h2>
+
+            <p className="text-5xl font-bold text-purple-400 mt-4">
+
+              {minutes}:{remainingSeconds}
+
+            </p>
+
+          </div>
+
+          <div className="space-x-4">
+
+            <button
+
+              onClick={() => setIsRunning(!isRunning)}
+
+              className="bg-purple-600 px-6 py-3 rounded-xl"
+
+            >
+
+              {isRunning ? "Pause" : "Resume"}
+
+            </button>
+
+            <button
+
+              onClick={() => {
+
+                setSeconds(0);
+
+                setIsRunning(false);
+
+              }}
+
+              className="bg-red-600 px-6 py-3 rounded-xl"
+
+            >
+
+              Reset
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
 
       <div className="mt-8 bg-slate-800 rounded-2xl p-6">
 
