@@ -6,6 +6,7 @@ function InterviewPrep() {
   const [loading, setLoading] = useState(true);
   const [openAnswer, setOpenAnswer] = useState(null);
   const [completedQuestions, setCompletedQuestions] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
 
   useEffect(() => {
     async function loadQuestions() {
@@ -55,6 +56,48 @@ function InterviewPrep() {
 
   }
 
+  function nextQuestion() {
+
+    if (
+
+      currentQuestion <
+
+      data.questions.length - 1
+
+    ) {
+
+      setCurrentQuestion(
+
+        currentQuestion + 1
+
+      );
+
+      setOpenAnswer(null);
+
+    }
+
+  }
+
+  function previousQuestion() {
+
+    if (
+
+      currentQuestion > 0
+
+    ) {
+
+      setCurrentQuestion(
+
+        currentQuestion - 1
+
+      );
+
+      setOpenAnswer(null);
+
+    }
+
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-900 text-white flex justify-center items-center text-3xl">
@@ -71,6 +114,10 @@ function InterviewPrep() {
         (completedCount / totalQuestions) * 100
       )
       : 0;
+
+  const question =
+
+    data?.questions?.[currentQuestion];
 
   return (
     <div className="min-h-screen bg-slate-900 text-white p-10">
@@ -137,16 +184,173 @@ function InterviewPrep() {
 
         <div className="flex flex-wrap gap-3 mt-5">
 
-          {data?.skills?.map((skill) => (
+          <div className="bg-slate-800 rounded-2xl p-8">
 
-            <span
-              key={skill}
-              className="bg-purple-600 hover:bg-purple-700 transition px-5 py-2 rounded-full text-white font-medium"
-            >
-              {skill}
+            <h3 className="text-2xl font-bold">
+
+              Question {currentQuestion + 1}
+
+              {" / "}
+
+              {totalQuestions}
+
+            </h3>
+
+            <p className="mt-6 text-2xl">
+
+              {question?.question}
+
+            </p>
+
+            <span className="inline-block mt-6 bg-green-600 px-5 py-2 rounded-full">
+
+              {question?.difficulty}
+
             </span>
 
-          ))}
+            <div className="mt-8 flex gap-4">
+
+              <button
+
+                onClick={() =>
+
+                  setOpenAnswer(
+
+                    !openAnswer
+
+                  )
+
+                }
+
+                className="bg-purple-600 px-6 py-3 rounded-xl"
+
+              >
+
+                {openAnswer
+
+                  ?
+
+                  "Hide Answer"
+
+                  :
+
+                  "Show Answer"}
+
+              </button>
+
+              <button
+
+                onClick={() =>
+
+                  toggleCompleted(
+
+                    currentQuestion
+
+                  )
+
+                }
+
+                className={`px-6 py-3 rounded-xl
+
+            ${completedQuestions.includes(
+
+                  currentQuestion
+
+                )
+
+                    ?
+
+                    "bg-green-600"
+
+                    :
+
+                    "bg-slate-700"
+
+                  }`}
+
+              >
+
+                {
+
+                  completedQuestions.includes(
+
+                    currentQuestion
+
+                  )
+
+                    ?
+
+                    "✓ Completed"
+
+                    :
+
+                    "Mark Completed"
+
+                }
+
+              </button>
+
+            </div>
+
+            {openAnswer && (
+
+              <div className="mt-8 bg-slate-900 rounded-xl p-6">
+
+                <h4 className="text-xl font-bold text-purple-400">
+
+                  Model Answer
+
+                </h4>
+
+                <p className="mt-4 leading-8">
+
+                  {question?.answer}
+
+                </p>
+
+              </div>
+
+            )}
+
+            <div className="flex justify-between mt-10">
+
+              <button
+
+                onClick={previousQuestion}
+
+                disabled={currentQuestion === 0}
+
+                className="bg-slate-700 px-6 py-3 rounded-xl"
+
+              >
+
+                Previous
+
+              </button>
+
+              <button
+
+                onClick={nextQuestion}
+
+                disabled={
+
+                  currentQuestion ===
+
+                  totalQuestions - 1
+
+                }
+
+                className="bg-purple-600 px-6 py-3 rounded-xl"
+
+              >
+
+                Next
+
+              </button>
+
+            </div>
+
+          </div>
 
         </div>
 
