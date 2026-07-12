@@ -5,6 +5,7 @@ function InterviewPrep() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [openAnswer, setOpenAnswer] = useState(null);
+  const [completedQuestions, setCompletedQuestions] = useState([]);
 
   useEffect(() => {
     async function loadQuestions() {
@@ -24,6 +25,36 @@ function InterviewPrep() {
     loadQuestions();
   }, []);
 
+  function toggleCompleted(index) {
+
+    if (completedQuestions.includes(index)) {
+
+      setCompletedQuestions(
+
+        completedQuestions.filter(
+
+          (item) => item !== index
+
+        )
+
+      );
+
+    }
+
+    else {
+
+      setCompletedQuestions([
+
+        ...completedQuestions,
+
+        index
+
+      ]);
+
+    }
+
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-900 text-white flex justify-center items-center text-3xl">
@@ -31,6 +62,15 @@ function InterviewPrep() {
       </div>
     );
   }
+
+  const totalQuestions = data?.questions?.length || 0;
+  const completedCount = completedQuestions.length;
+  const progress =
+    totalQuestions > 0
+      ? Math.round(
+        (completedCount / totalQuestions) * 100
+      )
+      : 0;
 
   return (
     <div className="min-h-screen bg-slate-900 text-white p-10">
@@ -44,6 +84,48 @@ function InterviewPrep() {
       <p className="text-gray-400 mt-3">
         Personalized interview questions based on your uploaded resume.
       </p>
+
+      <div className="mt-8 bg-slate-800 rounded-2xl p-6">
+
+        <div className="flex justify-between">
+
+          <h2 className="text-2xl font-bold">
+
+            Interview Progress
+
+          </h2>
+
+          <span className="text-purple-400 text-xl font-bold">
+
+            {progress}%
+
+          </span>
+
+        </div>
+
+        <div className="w-full bg-slate-700 rounded-full h-4 mt-5">
+
+          <div
+
+            className="bg-purple-600 h-4 rounded-full transition-all duration-500"
+
+            style={{
+
+              width: `${progress}%`
+
+            }}
+
+          ></div>
+
+        </div>
+
+        <p className="mt-4 text-gray-400">
+
+          {completedCount} / {totalQuestions} Questions Completed
+
+        </p>
+
+      </div>
 
       {/* Skills */}
 
@@ -95,10 +177,10 @@ function InterviewPrep() {
 
                 <span
                   className={`px-4 py-2 rounded-full text-white font-medium ${item.difficulty === "Easy"
-                      ? "bg-green-600"
-                      : item.difficulty === "Medium"
-                        ? "bg-yellow-500"
-                        : "bg-red-600"
+                    ? "bg-green-600"
+                    : item.difficulty === "Medium"
+                      ? "bg-yellow-500"
+                      : "bg-red-600"
                     }`}
                 >
                   {item.difficulty}
@@ -121,6 +203,18 @@ function InterviewPrep() {
                 {openAnswer === index
                   ? "Hide Answer"
                   : "Show Answer"}
+              </button>
+
+              <button
+                onClick={() => toggleCompleted(index)}
+                className={`mt-4 ml-4 px-5 py-3 rounded-xl font-semibold transition ${completedQuestions.includes(index)
+                  ? "bg-green-600 hover:bg-green-700"
+                  : "bg-slate-700 hover:bg-slate-600"
+                  }`}
+              >
+                {completedQuestions.includes(index)
+                  ? "✓ Completed"
+                  : "Mark as Completed"}
               </button>
 
               {openAnswer === index && (
